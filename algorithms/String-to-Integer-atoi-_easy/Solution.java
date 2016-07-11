@@ -11,40 +11,34 @@ You are responsible to gather all the input requirements up front.
 public class Solution {
     public int myAtoi(String str) {
         if(str == null) return 0;
-        String num = str.trim();
-        if(num.equals("")) return 0;
+        str = str.trim();
+        if(str.equals("")) return 0;
         int sign = 1;
         int i = 0;
-        if(num.charAt(0) == '-') {
+        if(str.charAt(i) == '-') {
             sign = -1;
-            i = 1;
-        } else if (num.charAt(0) == '+') {
-            i = 1;
+            i++;
+        } else if (str.charAt(i) == '+') {
+            i++;
         }
-        int result = 0;
-        for(; i< num.length(); i++) {
-            if (!Character.isDigit(num.charAt(i))) {
-                break;
-            }
-            if (result > 214748364) {
-                if(sign==1) {
-                    return 2147483647;
-                }else {
-                    return -2147483648;
-                }
-
-            } else if (result == 214748364) {
-                if((num.charAt(i)-'0')>7 && sign==1) {
-                    return 2147483647;
-                } else if ((num.charAt(i)-'0')>8 && sign == -1){
-                    return -2147483648;
-                } else {
-                    result = result*10 + num.charAt(i)-'0';
-                }
+        long result = 0;
+        boolean hasDigit = false;
+        for(;i<str.length(); i++) {
+            char c = str.charAt(i);
+            if(c>='0' && c<='9') {
+                hasDigit = true;
+                result = result*10 + str.charAt(i) -'0';
             } else {
-                result = result*10 + num.charAt(i)-'0';
+                if(hasDigit) {
+                    break;
+                } else {
+                    return 0;
+                }
             }
+            if(result > Integer.MAX_VALUE) {
+                return (sign == 1)? Integer.MAX_VALUE:Integer.MIN_VALUE;
+            }            
         }
-        return result*sign;
+        return (int)result*sign;
     }
 }
