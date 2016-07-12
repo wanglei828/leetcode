@@ -20,12 +20,9 @@ public class Solution {
             if(nums[mid]< nums[t]) {
                 t = mid;
             } else {
-                h = mid;
-            }
-            if(h+1 == t) {
-                break;
+                h = mid+1;
             }
         }
-        return (nums[h] < nums[t])? nums[h]: nums[t];
+        return nums[h];
     }
 }
