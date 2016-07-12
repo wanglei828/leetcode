@@ -30,12 +30,11 @@ public class Solution {
         while(!s.isEmpty() || root != null) {
             if(root != null) {
                 res.add(root.val);
-                if(root.right != null) {
-                    s.push(root.right);
-                }
+                s.push(root);
                 root = root.left;
             } else {
                 root = s.pop();
+                root = root.right;
             }
         }
         return res;
