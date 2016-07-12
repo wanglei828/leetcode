@@ -17,7 +17,7 @@ public class Solution {
             if(map.size()<2 || map.containsKey(c)) {
                 map.put(c, i);
             } else {
-                char cur;
+                char cur = '\0';
                 int min = Integer.MAX_VALUE;
                 for(Character key:map.keySet()) {
                     if(min>map.get(key)) {
