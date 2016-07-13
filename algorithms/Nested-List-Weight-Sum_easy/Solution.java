@@ -29,9 +29,7 @@ Given the list [1,[4,[6]]], return 27. (one 1 at depth 1, one 4 at depth 2, and 
  */
 public class Solution {
     public int depthSum(List<NestedInteger> nestedList) {
-        int sum = 0;
-        sum = helper(nestedList, 1);
-        return sum;
+        return helper(nestedList, 1);
     }
     private int helper(List<NestedInteger> nestedList, int depth) {
         int sum = 0;
