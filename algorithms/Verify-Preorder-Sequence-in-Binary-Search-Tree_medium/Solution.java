@@ -7,15 +7,20 @@ Follow up:
 Could you do it using only constant space complexity?
 */
 
-public boolean verifyPreorder(int[] preorder) {
-    int low = Integer.MIN_VALUE;
-    Stack<Integer> path = new Stack();
-    for (int p : preorder) {
-        if (p < low)
-            return false;
-        while (!path.empty() && p > path.peek())
-            low = path.pop();
-        path.push(p);
+public class Solution {
+    public boolean verifyPreorder(int[] preorder) {
+        if(preorder == null || preorder.length == 0) return true;
+        Stack<Integer> s = new Stack<Integer>();
+        int curMin = Integer.MIN_VALUE;
+        for(int val: preorder) {
+            if(val < curMin) {
+                return false;
+            }
+            while(!s.isEmpty() && val > s.peek()) {
+                curMin = s.pop();
+            }
+            s.push(val);
+        }
+        return true;
     }
-    return true;
 }
