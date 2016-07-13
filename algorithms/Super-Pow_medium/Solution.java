@@ -21,8 +21,8 @@ public class Solution {
     long base = 1337;
     public int superPow(int a, int[] b) {
         long la = (long)a;
-        long mod = la%base;
-        long index = 1;
+        long mod = 1;
+        long index = 0;
         Map<Long, Long> map = new HashMap<Long, Long>();
         Map<Long, Long> rmap = new HashMap<Long, Long>();
         while(!map.containsKey(mod)) {
@@ -38,8 +38,7 @@ public class Solution {
             sb.append(b[i]);
         }
         BigInteger b0 = new BigInteger(sb.toString());
-        if(b0.compareTo(BigInteger.valueOf(0)) == 0) return 1; 
-        if(b0.compareTo(BigInteger.valueOf(start)) <= 0) {
+        if(b0.compareTo(BigInteger.valueOf(start)) < 0) {
             return rmap.get(b0.longValue()).intValue();
         } else {
             BigInteger b1 = b0.subtract(BigInteger.valueOf(start));
