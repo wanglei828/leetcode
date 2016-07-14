@@ -15,12 +15,13 @@ public class Solution {
     public List<List<Integer>> permuteUnique(int[] nums) {
         if(nums == null || nums.length == 0) return res;
         Arrays.sort(nums);
-        helper(nums, null);
+        List<Integer> list = new ArrayList<Integer>();
+        helper(nums, list);
         return res;
     }
     
     private void helper(int[] nums, List<Integer> list) {
-        if(list != null && list.size() == nums.length) {
+        if(list.size() == nums.length) {
             List<Integer> copy = new ArrayList<Integer>();
             for(Integer i: list) {
                 copy.add(nums[i]);
@@ -28,7 +29,6 @@ public class Solution {
             res.add(copy);
             return;
         }
-        list = (list != null)? list : new ArrayList<Integer>(); 
         int size = list.size();
         int last = -1;
         for(int i=0; i<nums.length; i++) {
