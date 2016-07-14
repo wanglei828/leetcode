@@ -32,33 +32,36 @@ public class Solution {
         Stack<TreeNode> sl = new Stack<TreeNode>();
         Stack<TreeNode> sr = new Stack<TreeNode>();
         sl.add(root);
+        List<Integer> list = new ArrayList<Integer>();
         while(!sl.isEmpty() || !sr.isEmpty()) {
-            List<Integer> list = new ArrayList<Integer>();
-            if(!sl.isEmpty()) {
-                while(!sl.isEmpty()) {
-                    TreeNode tmp = sl.pop();
-                    if(tmp.left != null) {
-                        sr.push(tmp.left);
-                    }
-                    if(tmp.right != null) {
-                        sr.push(tmp.right);
-                    }
-                    list.add(tmp.val);
+            while(!sl.isEmpty()) {
+                TreeNode tmp = sl.pop();
+                if(tmp.left != null) {
+                    sr.push(tmp.left);
                 }
-                res.add(list);
-            } else if (!sr.isEmpty()) {
-                while(!sr.isEmpty()) {
-                    TreeNode tmp = sr.pop();
-                    if(tmp.right != null) {
-                        sl.push(tmp.right);
-                    }
-                    if(tmp.left != null) {
-                        sl.push(tmp.left);
-                    }
-                    list.add(tmp.val);
+                if(tmp.right != null) {
+                    sr.push(tmp.right);
                 }
+                list.add(tmp.val);
+            }
+            if(list.size() > 0) {
                 res.add(list);
-            }           
+                list = new ArrayList<Integer>();
+            }
+            while(!sr.isEmpty()) {
+                TreeNode tmp = sr.pop();
+                if(tmp.right != null) {
+                    sl.push(tmp.right);
+                }
+                if(tmp.left != null) {
+                    sl.push(tmp.left);
+                }
+                list.add(tmp.val);
+            }
+            if(list.size() > 0) {
+                res.add(list);
+                list = new ArrayList<Integer>();
+            }
         }
         return res;
     }
