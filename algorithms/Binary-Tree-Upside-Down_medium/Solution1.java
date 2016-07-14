@@ -33,28 +33,24 @@ public class Solution {
         if(root == null || root.left == null) return root;
         Stack<TreeNode> s = new Stack<TreeNode>();
         TreeNode res = null;
-        while(!s.isEmpty() || root != null) {
-            if(root != null) {
-                s.push(root);
-                root = root.left;
+        while(root != null) {
+            s.push(root);
+            root = root.left;
+        }
+        while(!s.isEmpty()) {
+            root = s.pop();
+            if(res == null) {
+                res = root;
+            }
+            if(s.isEmpty()) {
+                root.left = null;
+                root.right = null;
             } else {
-                root = s.pop();
-                if(res == null) {
-                    res = root;
-                }
-                if(s.isEmpty()) {
-                    root.left =  null;
-                    root.right = null;
-                    break;
-                }
                 TreeNode parent = s.peek();
-                if(parent.right != null) {
-                    root.left = parent.right;
-                }
+                root.left = parent.right;
                 root.right = parent;
                 parent.left = null;
                 parent.right = null;
-                root = null;
             }
         }
         return res;
