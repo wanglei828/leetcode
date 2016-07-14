@@ -16,6 +16,8 @@ Given "paper", "title", return true.
 public class Solution {
     public boolean isIsomorphic(String s, String t) {
         if(s == null && t == null) return true;
+        if(s == null || t == null) return false;
+        if(s.length() != t.length()) return false;
         Map<Character, Character> mapS = new HashMap<Character, Character>();
         Map<Character, Character> mapT = new HashMap<Character, Character>();
         for(int i = 0; i < s.length(); i++) {
@@ -25,15 +27,11 @@ public class Solution {
                 src = mapS.get(src);
             }
             if (src != tar) {
-                if(mapS.containsKey(s.charAt(i))) {
+                if(mapS.containsKey(s.charAt(i)) || mapT.containsKey(tar)) {
                     return false;
                 } else {
-                    if(mapT.containsKey(tar)) {
-                        return false;
-                    } else {
-                        mapS.put(src, tar);
-                        mapT.put(tar, src);
-                    }
+                    mapS.put(src, tar);
+                    mapT.put(tar, src);
                 }
             } else {
                 if(!mapS.containsKey(s.charAt(i))) {
