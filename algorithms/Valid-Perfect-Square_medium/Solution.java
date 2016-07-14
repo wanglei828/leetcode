@@ -15,8 +15,6 @@ Returns: False
 
 public class Solution {
     public boolean isPerfectSquare(int num) {
-        if(num == 1) return true;
-        if(num == 2 || num == 3) return false;
         int h = 1;
         int t = num;
         while(h<=t) {
