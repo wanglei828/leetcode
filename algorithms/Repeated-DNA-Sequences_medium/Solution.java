@@ -16,8 +16,7 @@ public class Solution {
         List<String> result = new ArrayList<>();
         Map<Integer, Boolean> map = new HashMap<Integer, Boolean>();
         for(int i = 0; i <= s.length() - 10; i++) {
-            String substr = null;
-            substr = s.substring(i, i+10);
+            String substr = s.substring(i, i+10);
             int v = transfer(substr);
             if(map.containsKey(v) && map.get(v)) {
                 result.add(substr);
