@@ -17,11 +17,7 @@ public class Solution {
         Map<Integer, Boolean> map = new HashMap<Integer, Boolean>();
         for(int i = 0; i <= s.length() - 10; i++) {
             String substr = null;
-            if(i == s.length() - 10) {
-                substr = s.substring(i);
-            } else {
-                substr = s.substring(i, i+10);
-            }
+            substr = s.substring(i, i+10);
             int v = transfer(substr);
             if(map.containsKey(v) && map.get(v)) {
                 result.add(substr);
