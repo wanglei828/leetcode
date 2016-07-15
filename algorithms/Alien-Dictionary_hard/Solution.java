@@ -62,7 +62,7 @@ public class Solution {
         Queue<Character> q = new LinkedList<Character>();
         for(int i=0; i<26; i++) {
             if(status[i] == 0) {
-                q.add(Character.valueOf((char)(i+'a')));
+                q.add((char)(i+'a'));
             }
         }
         StringBuilder sb = new StringBuilder();
