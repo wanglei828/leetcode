@@ -13,26 +13,21 @@ There are many calls to sumRange function.
 */
 
 public class NumArray {
-    private Map<Integer, Integer> sumMap;
-    private int length;
+    private int n;
+    private int[] sum;
     public NumArray(int[] nums) {
-        sumMap = new HashMap<Integer, Integer>();
-        length = nums.length;
-        sumMap.put(-1, 0);
-        int sum = 0;
-        for(int i= 0; i < nums.length; i++){
-            sum += nums[i];
-            sumMap.put(i, sum);
+        if(nums == null || nums.length == 0) return;
+        n = nums.length;
+        sum = new int[n+1];
+        for(int i= 1; i <=n; i++){
+            sum[i] = sum[i-1] + nums[i-1];
         }
     }
 
     public int sumRange(int i, int j) {
-        if ( i < 0) i = 0;
-        if ( j >= length) j = length-1;
-        return sumMap.get(j) - sumMap.get(i-1); 
+        return sum[j+1] - sum[i];
     }
 }
-
 
 // Your NumArray object will be instantiated and called as such:
 // NumArray numArray = new NumArray(nums);
