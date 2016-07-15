@@ -8,20 +8,22 @@ public class Solution {
     public int[] plusOne(int[] digits) {
         if(digits == null || digits.length == 0)  return new int[0];
         int n = digits.length;
-        int carry = 0;
-        List<Integer> res = new ArrayList<Integer>();
-        for(int i=n-1; i>=0; i--) {
-            int sum = (i == n-1)? carry + digits[i] + 1 : carry + digits[i];
-            res.add(0, sum%10);
-            carry = sum/10;
+        int not9 = -1;
+        for(int i=0; i<n; i++) {
+            if(digits[i] != 9) {
+                not9 = i;
+            }
         }
-        if(carry != 0) {
-            res.add(0, carry);
+        if(not9 == -1) {
+            int[] res = new int[n+1];
+            res[0] = 1;
+            return res;
+        } else {
+            digits[not9++]++;
+            while(not9<n) {
+                digits[not9++] = 0;
+            }
+            return digits;
         }
-        int[] rslt = new int[res.size()];
-        for(int i=0; i<res.size(); i++) {
-            rslt[i] = res.get(i);
-        }
-        return rslt;
     }
 }
