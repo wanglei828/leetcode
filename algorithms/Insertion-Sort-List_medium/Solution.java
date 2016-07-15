@@ -12,37 +12,33 @@ Sort a linked list using insertion sort.
  */
 public class Solution {
     public ListNode insertionSortList(ListNode head) {
-        if(head == null) return null;
-        ListNode res = new ListNode(-1);
-        res.next = null;
-        ListNode iter = res;
+        if(head == null) return head;
+        ListNode res = new ListNode(0);
+        res.next = head;
+        ListNode next = head.next;
+        head.next = null;
+        head = next;
         while(head != null) {
-            if(iter == res) {
-                iter.next = head;
-                iter = iter.next;
-                head = head.next;
-                iter.next = null;
-                continue;
-            }
-            ListNode pre = res;
             ListNode cur = res.next;
+            ListNode pre = res;
+            next = head.next;
             while(cur != null) {
-                if(cur.val >= head.val) {
+                if(cur.val <= head.val) {
+                    pre = cur;
+                    cur = cur.next;
+                } else {
+                    pre.next = head;
+                    pre = head;
+                    pre.next = cur;
                     break;
                 }
-                pre = cur;
-                cur = cur.next;
             }
-            pre.next = head;
-            ListNode next = head.next;
-            head.next = cur;
-            head = next;
             if(cur == null) {
-                iter = pre.next;
+                pre.next = head;
+                head.next = null;
             }
+            head = next;
         }
-        iter.next = null;
         return res.next;
     }
 }
-
