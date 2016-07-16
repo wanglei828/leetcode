@@ -8,21 +8,21 @@ the subarray [4,3] has the minimal length under the problem constraint.
 
 public class Solution {
     public int minSubArrayLen(int s, int[] nums) {
-        if(nums==null || nums.length==0) return 0;
+        if(nums == null || nums.length == 0) return 0;
         int n = nums.length;
-        int min = n+1;
-        int left = 0;
-        int cur = 0;
-        int l = -1;
+        int min=n+1, l=-1;
+        long cursum = 0;
+        long left = 0;
         for(int i=0; i<n; i++) {
-            cur += nums[i];
-            if(cur < s) continue;
-            while(l<i && cur-left>=s) {
-                min = Math.min(min, i-l);
-                l++;
-                left += nums[l];
+            cursum += nums[i];
+            if(cursum >=s ) {
+                while(l<i  && cursum - left>= s) {
+                    min = Math.min(min, i-l);
+                    l++;
+                    left += nums[l];
+                }
             }
         }
-        return (min == n+1)? 0 : min;
+        return (min == n+1)? 0:min;
     }
 }
