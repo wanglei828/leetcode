@@ -20,29 +20,21 @@ public class Solution extends Reader4 {
      * @return    The number of characters read
      */
     private char[] rf = new char[4];
-    private int offset = 3;
-    private int last = 3;
+    private int bufptr = 0;
+    private int bufcnt = 0;
     public int read(char[] buf, int n) {
         int sum = 0;
-        boolean eof = false; 
-        for(int i=offset; i<last && sum<n; i++) {
-            buf[sum] = rf[i];
-            sum++;
-            offset++;
-        }
-        while(sum<n && !eof) {
-            int cur = read4(rf);
-            if(cur < 4){
-                eof = true;
+        while(sum<n) {
+            if(bufptr == 0) {
+                bufcnt = read4(rf);
             }
-            int i=0;
-            for(; i<cur && sum<n; i++) {
-                buf[sum] = rf[i];
-                sum++;
-            }
-            if(i<cur) {
-                offset = i;
-                last = cur;
+            if(bufcnt == 0) break;
+            while(sum<n) {
+                buf[sum++] = rf[bufptr++];
+                if(bufptr == bufcnt) {
+                    bufptr = 0;
+                    break;
+                }
             }
         }
         return sum;
