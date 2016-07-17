@@ -18,15 +18,17 @@ public class Solution extends Reader4 {
     public int read(char[] buf, int n) {
         char[] tmp = new char[4];
         int sum = 0;
-        boolean eof = false;
-        while(sum < n && !eof) {
-            int cur = read4(tmp);
-            if(cur < 4) {
-                eof = true;
-            }
-            for(int i=0; i<cur && sum<n; i++) {
-                buf[sum] = tmp[i];
-                sum++;
+        int cnt = 0;
+        int ptr = 0;
+        while(sum < n) {
+            cnt = read4(tmp);
+            if(cnt == 0) break;
+            while(sum<n) {
+                buf[sum++] = tmp[ptr++];
+                if(ptr == cnt) {
+                    ptr = 0;
+                    break;
+                }
             }
         }
         return sum;
