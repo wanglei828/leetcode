@@ -14,16 +14,12 @@ For example:
 
 public class Solution {
     public int titleToNumber(String s) {
-        if(s == null || s == "") return 0;
-        int num = 0;
-        for(int i = 0; i<s.length(); i++) {
-            int item = s.charAt(i) - 'A' + 1;
-            /*
-            if(num> Math.pow(2,31)/26 || (num == Math.pow(2,31)/26 && item>=Math.pow(2,31)%26)) {
-                return (int)Math.pow(2,31) -1;
-            }*/
-            num = num*26 + item;
+        if(s == null || s.length() == 0) return 0;
+        int res = 0;
+        for(int i=0; i<s.length(); i++) {
+            char c = s.charAt(i);
+            res = res*26 + c-'A'+1;
         }
-        return num;
+        return res;
     }
 }
