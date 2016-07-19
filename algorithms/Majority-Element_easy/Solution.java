@@ -9,15 +9,11 @@ public class Solution {
         int cur = nums[0];
         int count = 1;
         for(int i=1; i<nums.length; i++) {
-            if(count == 0) {
+            if(count == 0 || cur == nums[i]) {
                 cur = nums[i];
-                count =1;               
+                count++;               
             } else {
-                if(cur == nums[i]) {
-                    count++;
-                } else {
-                    count--;
-                }
+                count--;
             }
         }
         return cur;
