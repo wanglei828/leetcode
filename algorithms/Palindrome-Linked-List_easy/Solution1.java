@@ -13,10 +13,10 @@ Could you do it in O(n) time and O(1) space?
  *     ListNode(int x) { val = x; }
  * }
  */
+ 
 public class Solution {
     public boolean isPalindrome(ListNode head) {
         if(head == null) return true;
-        ListNode org = head;
         ListNode slow = head;
         ListNode fast = head;
         while(fast.next != null && fast.next.next != null) {
@@ -33,10 +33,10 @@ public class Solution {
             cur = next;
         } 
         while(pre != slow) {
-            if(org.val != pre.val) {
+            if(head.val != pre.val) {
                 return false;
             }
-            org = org.next;
+            head = head.next;
             pre = pre.next;
         }
         return true;
