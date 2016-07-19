@@ -16,13 +16,12 @@ public class Solution {
         ListNode pre = null;
         ListNode cur = head;
         ListNode next = head.next;
-        cur.next = pre;
-        while(next != null) {
+        while(cur != null) {
+            next = cur.next;
+            cur.next = pre;
             pre = cur;
             cur = next;
-            next = next.next;
-            cur.next = pre;
         }
-        return cur;
+        return pre;
     }
 }
