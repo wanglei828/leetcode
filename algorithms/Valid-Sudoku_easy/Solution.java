@@ -30,10 +30,8 @@ public class Solution {
                 }
             }
         }// check column and row;
-        int m = 0;
-        while(m<9) {
-            int n = 0;
-            while(n<9) {
+        for(int m=0; m<9; m+=3) {
+            for(int n=0; n<9; n+=3) {
                 rset.clear();
                 for(int i=m; i<m+3; i++) {
                     for(int j=n; j<n+3; j++) {
@@ -44,9 +42,7 @@ public class Solution {
                         }
                     }
                 }
-                n += 3;
             }
-            m += 3;
         }
         return true;
     }
