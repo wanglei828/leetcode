@@ -22,31 +22,27 @@ public class Solution {
         }
         String[] str1 = version1.split("\\.");
         String[] str2 = version2.split("\\.");
-        int len = (str1.length <= str2.length)? str1.length : str2.length;
+        int len = Math.min(str1.length, str2.length);
         for(int i = 0; i < len; i++) {
-            if (Integer.valueOf(str1[i]) < Integer.valueOf(str2[i])) {
+            int v1 = Integer.valueOf(str1[i]);
+            int v2 = Integer.valueOf(str2[i]);
+            if ( v1 < v2) {
                 return -1;
-            } else if (Integer.valueOf(str1[i]) > Integer.valueOf(str2[i])) {
+            } else if (v1 > v2) {
                 return 1;
             }
         }
-        if (str1. length > str2.length) {
-            for(int i = str2.length; i < str1.length; i++) {
-                if(Integer.valueOf(str1[i]) != 0) {
-                    return 1;
-                }
+        for(int i = len; i < str1.length; i++) {
+            if(Integer.valueOf(str1[i]) != 0) {
+                return 1;
             }
-            return 0;
-        } else if (str1. length < str2.length) {
-            for(int i = str1.length; i < str2.length; i++) {
-                if(Integer.valueOf(str2[i]) != 0) {
-                    return -1;
-                }
-            }
-            return 0;
-        } else {
-            return 0;
         }
+        for(int i = len; i < str2.length; i++) {
+            if(Integer.valueOf(str2[i]) != 0) {
+                return -1;
+            }
+        }
+        return 0;
 
     }
 }
