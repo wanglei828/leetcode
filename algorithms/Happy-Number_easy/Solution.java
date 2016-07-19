@@ -15,25 +15,18 @@ Example: 19 is a happy number
 
 public class Solution {
     public boolean isHappy(int n) {
-        if(n<=0) return false;
-        if(n==1) return true;
-        int orig = n;
-        int sum = 0;
         Set<Integer> set = new HashSet<Integer>();
-        while(true) {
-            while(n/10>=1) {
-                sum += (n%10)*(n%10);
+        while(n != 1) {
+            int cur = 0;
+            while(n>0) {
+                cur += (n%10)*(n%10);
                 n /= 10;
             }
-            sum += (n%10)*(n%10);
-            if(sum == 1) return true;
-            if(set.contains(sum)) {
+            if(!set.add(cur)) {
                 return false;
-            } else {
-                set.add(sum);
             }
-            n = sum;
-            sum = 0;
+            n = cur;
         }
+        return true;
     }
 }
