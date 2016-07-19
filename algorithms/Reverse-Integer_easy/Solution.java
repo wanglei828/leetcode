@@ -21,53 +21,14 @@ Test cases had been added to test the overflow behavior.
 
 public class Solution {
     public int reverse(int x) {
-        if(x==0) return 0;
-        if(x==-2147483648) return 0;
-        int sign = 1;
-        if(x < 0) {
-            x *= -1;
-            sign = -1;
+        int res = 0;
+        while(x != 0) {
+            int tail = x%10;
+            int newres = res*10 + tail;
+            if((newres-tail)/10 != res) return 0;
+            res = newres;
+            x /= 10;
         }
-        int result = 0;
-        while(x/10 >= 1) {
-            if (result > 214748364) {
-                if(sign == 1) {
-                    return 0;
-                } else {
-                    return 0;
-                }
-            } else if (result == 214748364){
-                if(sign == 1 && x%10 > 7) {
-                    return 0;
-                } else if (sign == -1 && x%10 > 8) {
-                    return 0;
-                } else {
-                    result = result*10 + x%10;
-                }
-                
-            } else {
-                result = result*10 + x%10;
-            }
-            x = x/10;
-        }
-        if (result > 214748364) {
-            if(sign == 1) {
-                return 0;
-            } else {
-                return 0;
-            }
-        } else if (result == 214748364){
-            if(sign == 1 && x%10 > 7) {
-                return 0;
-            } else if (sign == -1 && x%10 > 8) {
-                return 0;
-            } else {
-                result = result*10 + x%10;
-            }
-                
-        } else {
-            result = result*10 + x%10;
-        }       
-        return result*sign;
+        return res;
     }
 }
