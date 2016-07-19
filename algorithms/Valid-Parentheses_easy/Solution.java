@@ -27,8 +27,7 @@ public class Solution {
                     case ']':
                         if(stack.pop() != '[') {
                             return false;
-                        } break;
-                    default: break;
+                        }
                 }
             } else {
                 return false;
