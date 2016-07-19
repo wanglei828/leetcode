@@ -18,9 +18,7 @@ public class Solution {
         for(int i=1; i<nums.length; i++) {
             if(nums[i] != cur) {
                 if(pos != i) {
-                    int tmp = nums[i];
-                    nums[i] = nums[pos];
-                    nums[pos] = tmp;
+                    nums[pos] = nums[i];
                 }
                 cur = nums[pos];
                 pos++;
