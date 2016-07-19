@@ -15,23 +15,16 @@ public class Solution {
         if(s == null) return 0;
         int i = s.length()-1;
         int j = -1;
-        while(i>=0) {
-            if(Character.isAlphabetic(s.charAt(i))) {
-                j = i;
-                i--;
-                break;
-            }
+        while(i>=0 && !Character.isAlphabetic(s.charAt(i))) {
             i--;
         }
-        if(j == -1) {
+        if(i == -1) {
             return 0;
         }
-        while(i>=0) {
-             if(!Character.isAlphabetic(s.charAt(i))) {
-                break;
-            }
-            i--;
+        j = i-1;
+        while(j>=0 && Character.isAlphabetic(s.charAt(j))) {
+            j--;
         }
-        return j - i;
+        return i-j;
     }
 }
