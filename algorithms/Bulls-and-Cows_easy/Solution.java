@@ -23,28 +23,30 @@ You may assume that the secret number and your friend's guess only contain digit
 
 public class Solution {
     public String getHint(String secret, String guess) {
-        Map<Integer, Integer> map = new HashMap<Integer, Integer>();
+        Map<Character, Integer> map = new HashMap<Character, Integer>();
         int nA = 0;
         int nB = 0;
         for (int i = 0; i < secret.length(); i++) {
-            if(map.containsKey(secret.charAt(i) - '0')) {
-                map.put(secret.charAt(i) - '0', map.get(secret.charAt(i) - '0') + 1);
-            } else {
-                map.put(secret.charAt(i) - '0', 1);
-            }
-        }
-        for (int i = 0; i < secret.length(); i++) {
-            if (secret.charAt(i) == guess.charAt(i)) {
+            char s = secret.charAt(i);
+            char g = guess.charAt(i);
+            if(s == g) {
                 nA++;
-                map.put(secret.charAt(i)-'0', map.get(secret.charAt(i) - '0') - 1);
-            } 
-        }
-        for (int i = 0; i < secret.length(); i++) {
-            if (secret.charAt(i) != guess.charAt(i) && map.containsKey(guess.charAt(i) - '0') && map.get(guess.charAt(i) - '0') > 0) {
-                nB++;
-                map.put(guess.charAt(i)-'0', map.get(guess.charAt(i) - '0') - 1);
+            } else {
+                if(!map.containsKey(s)) {
+                    map.put(s, 1);
+                } else {
+                    map.put(s, map.get(s)+1);
+                }
             }
         }
+        for (int i = 0; i < guess.length(); i++) {
+            char g = guess.charAt(i);
+            char s = secret.charAt(i);
+            if(s !=g && map.containsKey(g) && map.get(g)>0) {
+                map.put(g, map.get(g)-1);
+                nB++;
+            }
+        }      
         StringBuilder sb = new StringBuilder();
         sb.append(Integer.toString(nA));
         sb.append("A");
