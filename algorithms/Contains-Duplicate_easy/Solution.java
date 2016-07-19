@@ -6,16 +6,13 @@ and it should return false if every element is distinct.
 
 public class Solution {
     public boolean containsDuplicate(int[] nums) {
-      if(nums==null || nums.length==0)
-          return false;
-   
-      HashSet<Integer> set = new HashSet<Integer>();
-      for(int i: nums){
-          if(!set.add(i)){
-              return true;
-          }
-      }
-   
-      return false;
+        if(nums == null || nums.length == 0) return false;
+        Set<Integer> set = new HashSet<Integer>();
+        for(int i=0; i<nums.length; i++) {
+            if(!set.add(nums[i])) {
+                return true;
+            } 
+        }
+        return false;
     }
 }
