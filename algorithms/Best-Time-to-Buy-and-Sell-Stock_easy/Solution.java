@@ -23,16 +23,12 @@ Show Similar Problems
 public class Solution {
     public int maxProfit(int[] prices) {
         if (prices.length < 2) return 0;
-        int sum = 0;
+        int max = 0;
         int min = prices[0];
         for(int i = 1; i < prices.length; i++) {
-            if(prices[i] < min) {
-                min = prices[i];
-            }
-            if(sum < (prices[i] - min)) {
-                sum = prices[i] -min;
-            }
+            min = Math.min(min, prices[i]);
+            max = Math.max(max, prices[i]-min);
         }
-        return sum;
+        return max;
     }
 }
