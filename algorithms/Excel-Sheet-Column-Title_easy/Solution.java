@@ -14,18 +14,18 @@ For example:
 
 public class Solution {
     public String convertToTitle(int n) {
-        StringBuilder num = new StringBuilder();
+        if(n<=0) return "";
+        StringBuilder sb = new StringBuilder();
         while(n > 0) {
-            char tmp;
             if(n%26 == 0) {
-                tmp = 'Z';
-                n = n/26 - 1;
+                sb.insert(0, "Z");
+                n -= 26;
+                n /= 26;
             } else {
-                tmp = (char)('A' - 1 + n%26);
-                n = n/26;
+                sb.insert(0, (char)(n%26 + 'A' -1));
+                n /=26;
             }
-            num.append(tmp);
         }
-        return num.reverse().toString();
+        return sb.toString();
     }
 }
