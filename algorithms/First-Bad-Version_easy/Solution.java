@@ -16,15 +16,14 @@ public class Solution extends VersionControl {
     public int firstBadVersion(int n) {
         int h = 1;
         int t = n;
-        int m = h+(t-h)/2;
-        while(h<t) {
-            if(isBadVersion(m)) {
-                t = m-1;
+        while(h <= t) {
+            int check = h + (t-h)/2;
+            if (isBadVersion(check)) {
+                t = check-1;
             } else {
-                h = m+1;
+                h = check+1;
             }
-            m = h + (t-h)/2;
         }
-        return (isBadVersion(h))? h : h+1;
+        return t+1;
     }
 }
