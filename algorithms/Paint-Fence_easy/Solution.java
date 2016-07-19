@@ -8,9 +8,7 @@ Return the total number of ways you can paint the fence.
 
 public class Solution {
     public int numWays(int n, int k) {
-        if(k == 0 || n == 0) return 0;
-        if(k == 1 && n > 2) return 0;
-        if(k == 1 && n <= 2) return 1;
+        if(k == 0 || n == 0 || k == 1 && n > 2) return 0;
         if(n == 1) return k;
         int[] same = new int[n];
         int[] diff = new int[n];
