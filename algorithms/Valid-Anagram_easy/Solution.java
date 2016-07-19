@@ -11,10 +11,8 @@ You may assume the string contains only lowercase alphabets.
 
 public class Solution {
     public boolean isAnagram(String s, String t) {
-        if(s == null && t != null) return false;
-        if(s != null && t == null) return false;
         if(s == null && t == null) return true;
-        if(s.length() != t.length()) return false;
+        if(s == null || t == null || s.length() != t.length()) return false;
         char[] sArr = s.toCharArray();
         char[] tArr = t.toCharArray();
         Arrays.sort(sArr);
