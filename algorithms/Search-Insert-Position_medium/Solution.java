@@ -16,22 +16,16 @@ public class Solution {
         if(nums.length == 0) return 0;
         int h = 0;
         int t = nums.length-1;
-        int mid = h + (t-h)/2;
-        while(h < t) {
-            int tmp = nums[mid];
-            if(tmp < target) {
-                h = mid + 1;
-            } else if (tmp > target) {
-                t= mid -1;
+        while(h <= t) {
+            int m = h + (t-h)/2;
+            if(nums[m] < target) {
+                h = m + 1;
+            } else if (nums[m] > target) {
+                t= m -1;
             } else {
-                return mid;
+                return m;
             }
-            mid = h+(t-h)/2;
         }
-        if(nums[h] < target) {
-            return h+1;
-        } else {
-            return h;
-        }
+        return h;
     }
 }
