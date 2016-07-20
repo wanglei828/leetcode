@@ -17,10 +17,7 @@ public class Solution {
             dp[i] = i;
             int sqrt = (int)Math.sqrt(i);
             for(int j=1; j<=sqrt; j++) {
-                int min = 1+ dp[i-j*j];
-                if(dp[i] > min) {
-                    dp[i] = min;
-                }
+                dp[i] = Math.min(dp[i], 1+ dp[i-j*j]);
             }
         }
         return dp[n];
