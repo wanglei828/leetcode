@@ -34,10 +34,8 @@ public class Solution {
         int size = list.size();
         for(int i = start; i <= n; i++) {
             list.add(i);
-            k--;
-            helper(i+1, n, k, list);
+            helper(i+1, n, k-1, list);
             list.remove(size);
-            k++;
         }
     }
 }
