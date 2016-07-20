@@ -23,8 +23,8 @@ public class Solution {
         int c = matrix[0].length;
         int h = 0;
         int t = r-1;
-        int mid = h + (t-h)/2;
-        while(h<t) {
+        while(h<=t) {
+            int mid = h + (t-h)/2;
             if(target < matrix[mid][0]) {
                 t = mid-1;
             } else if (target > matrix[mid][0]) {
@@ -32,22 +32,12 @@ public class Solution {
             } else {
                 return true;
             }
-            mid = h + (t-h)/2;
         }
-        if( target > matrix[h][0]) {
-            r = h;
-        } else if(target == matrix[h][0]) {
-            return true;
-        } else {
-            r = h -1;
-            if(r < 0) {
-                return false;
-            }
-        }
+        r = (t<0)? 0 : t;
         h = 0;
         t = c-1;
-        mid = h + (t-h)/2;
-        while(h<t) {
+        while(h<=t) {
+            int mid = h + (t-h)/2;
             if(target < matrix[r][mid]) {
                 t = mid-1;
             } else if (target > matrix[r][mid]) {
@@ -55,8 +45,7 @@ public class Solution {
             } else {
                 return true;
             }
-            mid = h + (t-h)/2;
         }        
-        return (matrix[r][h] == target);
+        return false;
     }
 }
