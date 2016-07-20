@@ -15,8 +15,10 @@ For example, given n = 3, a solution set is:
 public class Solution {
     List<String> res = new ArrayList<String>();
     public List<String> generateParenthesis(int n) {
+        if(n == 0) return res;
         StringBuilder sb = new StringBuilder();
-        generate(sb, 0, 0, n);
+        sb.append("(");
+        generate(sb, 1, 0, n);
         return res;
     }
     
@@ -27,19 +29,14 @@ public class Solution {
         }
         int len = sb.length();
         if(left < n) {
-            if(len == 0) {
-                sb.append("(");
-                generate(sb, left+1, right, n);
-            } else {
-                sb.append("(");
-                generate(sb, left+1, right, n);
-                sb.deleteCharAt(len);
-            }
+            sb.append("(");
+            generate(sb, left+1, right, n);
+            sb.setLength(len);
         }
         if(left > right) {
             sb.append(")");
             generate(sb, left, right+1, n);
-            sb.deleteCharAt(len);
+            sb.setLength(len);
         }
     }
 }
