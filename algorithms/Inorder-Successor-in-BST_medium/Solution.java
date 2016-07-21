@@ -13,39 +13,29 @@ Note: If the given node has no in-order successor in the tree, return null.
  *     TreeNode(int x) { val = x; }
  * }
  */
+ 
 public class Solution {
     public TreeNode inorderSuccessor(TreeNode root, TreeNode p) {
-        if(root == null || p == null) return null;
-        TreeNode res = null;
+        if(root == null) return null;
         if(p.right != null) {
-            res = p.right;
-            while(res.left != null) {
-                res = res.left;
-            }
-            return res;
+            p = p.right;
+            while(p.left != null) p = p.left;
+            return p;
         } else {
-            if(root == p) return null;
-            TreeNode parent =  findParent(root, p);
-            while(parent.left != p) {
+            TreeNode parent = findParent(root, p);
+            while(parent != null && parent.left != p) {
                 p = parent;
-                if(p == root) {
-                    return null;
-                }
                 parent = findParent(root, p);
             }
             return parent;
         }
     }
+    
     private TreeNode findParent(TreeNode root, TreeNode p) {
-        if(root.left == p || root.right == p) return root;
-        TreeNode res = null;
-        if(root.left != null) {
-            res = findParent(root.left, p);
-        }
-        if(res != null) return res;
-        if(root.right != null) {
-            res = findParent(root.right, p);
-        }
-        return res;
+        if(root == null || root == p) return null;
+        if(root.right == p || root.left == p) return root;
+        TreeNode left = findParent(root.left, p);
+        TreeNode right = findParent(root.right, p);
+        return (left == null)? right : left;
     }
 }
