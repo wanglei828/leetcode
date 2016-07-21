@@ -25,6 +25,7 @@ Another example is LCA of nodes 5 and 4 is 5, since a node can be a descendant o
  *     TreeNode(int x) { val = x; }
  * }
  */
+ 
 public class Solution {
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
         if(root == null || root == p || root == q) return root;
@@ -32,12 +33,8 @@ public class Solution {
         TreeNode right = lowestCommonAncestor(root.right, p, q);
         if(left != null && right != null) {
             return root;
-        } else if (left != null && right == null) {
-            return left;
-        } else if (left == null && right != null) {
-            return right;
         } else {
-            return null;
+            return (left == null)? right : left;
         }
     }
 }
