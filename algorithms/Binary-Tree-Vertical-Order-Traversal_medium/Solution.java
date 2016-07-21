@@ -66,6 +66,7 @@ return its vertical order traversal as:
  *     TreeNode(int x) { val = x; }
  * }
  */
+ 
 public class Solution {
     public List<List<Integer>> verticalOrder(TreeNode root) {
         List<List<Integer>> res = new ArrayList<List<Integer>>();
@@ -75,6 +76,7 @@ public class Solution {
         Queue<Integer> tagQ = new LinkedList<Integer>();
         nQ.add(root);
         tagQ.add(0);
+        int min = 0, max = 0;
         while(!nQ.isEmpty()) {
             TreeNode node = nQ.poll();
             int tag = tagQ.poll();
@@ -88,21 +90,17 @@ public class Solution {
             if(node.left != null) {
                 nQ.add(node.left);
                 tagQ.add(tag-1);
+                min = Math.min(min, tag-1);
+                
             }
             if(node.right != null) {
                 nQ.add(node.right);
                 tagQ.add(tag+1);
+                max = Math.max(max, tag+1);
             }
         }
-        int[] arr = new int[map.size()];
-        int i=0;
-        for(Integer key:map.keySet()) {
-            arr[i] = key;
-            i++;
-        }
-        Arrays.sort(arr);
-        for(i=0; i<arr.length; i++) {
-            res.add(map.get(arr[i]));
+        for(int i=min; i<=max; i++) {
+            res.add(map.get(i));
         }
         return res;
     }
