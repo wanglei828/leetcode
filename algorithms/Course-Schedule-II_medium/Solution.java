@@ -27,41 +27,32 @@ Read more about how a graph is represented.
 public class Solution {
     public int[] findOrder(int numCourses, int[][] prerequisites) {
         int[] res = new int[numCourses];
-        if(numCourses == 0) return res;
-        if(numCourses == 1) {
-            res[0] = 0;
-            return res;
-        }
-        int index = 0;
         int[] status = new int[numCourses];
+        Map<Integer, List<Integer>> map = new HashMap<Integer, List<Integer>>();
+        for(int i=0; i<numCourses; i++) {
+            map.put(i, new ArrayList<Integer>());
+        }
         for(int i=0; i<prerequisites.length; i++) {
             status[prerequisites[i][0]]++;
+            map.get(prerequisites[i][1]).add(prerequisites[i][0]);
         }
+        
         Queue<Integer> q = new LinkedList<Integer>();
         for(int i=0; i<numCourses; i++) {
             if(status[i] == 0) {
                 q.add(i);
             }
         }
-        if(q.size() == 0) return (new int[0]);
-        int left = numCourses - q.size();
+        if(q.size() == 0) return new int[0];
+        int cnt = 0;
         while(!q.isEmpty()) {
             int c = q.poll();
-            res[index] = c;
-            index++;
-            for(int i=0; i<prerequisites.length; i++) {
-               if(prerequisites[i][1] == c && status[prerequisites[i][0]] > 0) {
-                   status[prerequisites[i][0]]--;
-                   if(status[prerequisites[i][0]] == 0){
-                       q.add(prerequisites[i][0]);
-                       left--;
-                   } 
-               }     
-            }
-            if(q.size() == 0 && left !=0) {
-                return (new int[0]);
+            res[cnt++] = c;
+            for(Integer i: map.get(c)) {
+                status[i]--;
+                if(status[i] == 0) q.add(i);
             }
         }
-        return res;
+        return (cnt == numCourses)? res : new int[0];
     }
 }
