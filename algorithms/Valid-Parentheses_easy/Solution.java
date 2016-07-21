@@ -11,7 +11,7 @@ public class Solution {
             char a = s.charAt(i);
             if (a == '(' || a == '{' || a == '[') {
                 stack.push(s.charAt(i));
-            } else if (a == ')' || a == '}' || a == ']') {
+            } else {
                 if(stack.empty()){
                     return false;
                 }
@@ -27,10 +27,9 @@ public class Solution {
                     case ']':
                         if(stack.pop() != '[') {
                             return false;
-                        }
+                        } break;
+                    default: return false;
                 }
-            } else {
-                return false;
             }
         }
         return stack.empty();
