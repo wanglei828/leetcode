@@ -31,7 +31,7 @@ public class Solution {
             if(cur.end < tmp.start) {
                 res.add(cur);
                 cur = tmp;
-            } else if( cur.end >= tmp.start) {
+            } else {
                 cur.end = Math.max(cur.end, tmp.end);
             } 
         }
