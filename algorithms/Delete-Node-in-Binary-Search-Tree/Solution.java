@@ -36,5 +36,6 @@ public class Solution {
       min = node.left.val;
       node = node.left;
     }
+    return min;
   }
 }
