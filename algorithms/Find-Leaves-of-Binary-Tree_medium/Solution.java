@@ -34,14 +34,14 @@ Returns [4, 5, 3], [2], [1].
  *     TreeNode(int x) { val = x; }
  * }
  */
+ 
 public class Solution {
     public List<List<Integer>> findLeaves(TreeNode root) {
         List<List<Integer>> res = new ArrayList<List<Integer>>();
-        List<Integer> leaves = new ArrayList<Integer>();
         while(root != null) {
+            List<Integer> leaves = new ArrayList<Integer>();
             if(isLeave(root, leaves)) root = null;
             res.add(leaves);
-            leaves = new ArrayList<Integer>();
         }
         return res;
     }
