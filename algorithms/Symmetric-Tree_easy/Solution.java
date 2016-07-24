@@ -35,8 +35,6 @@ public class Solution {
         if(left == null && right == null) return true;
         if(left == null || right == null) return false;
         if(left.val != right.val) return false;
-        if(!helper(left.left, right. right)) return false;
-        if(!helper(left.right, right.left)) return false;
-        return true;
+        return helper(left.left, right. right) && helper(left.right, right.left);
     }
 }
