@@ -14,15 +14,17 @@ Return:
 public class Solution {
     public List<String> findRepeatedDnaSequences(String s) {
         List<String> result = new ArrayList<>();
-        Map<Integer, Boolean> map = new HashMap<Integer, Boolean>();
+        Map<Integer, Integer> map = new HashMap<Integer, Integer>();
         for(int i = 0; i <= s.length() - 10; i++) {
-            String substr = s.substring(i, i+10);
+            String substr = substr = s.substring(i, i+10);
             int v = transfer(substr);
-            if(map.containsKey(v) && map.get(v)) {
-                result.add(substr);
-                map.put(v, false);
-            } else if(!map.containsKey(v)) {
-                map.put(v, true);
+            if(map.containsKey(v)) {
+                if(map.get(v) == 1) {
+                    result.add(substr);
+                }
+                map.put(v, map.get(v)+1);
+            } else {
+                map.put(v, 1);
             }
         }
         return result;
