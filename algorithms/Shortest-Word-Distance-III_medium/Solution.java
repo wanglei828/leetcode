@@ -17,12 +17,12 @@ You may assume word1 and word2 are both in the list.
 
 public class Solution {
     public int shortestWordDistance(String[] words, String word1, String word2) {
-        int p1 = -1;
-        int p2 = -1;
+        int p1 = -1, p2 = -1;
         int min = words.length;
+        boolean same = word1.equals(word2);
         for(int i=0; i<words.length; i++) {
             String s = words[i];
-            if(!word1.equals(word2)) {
+            if(!same) {
                 if(s.equals(word1)) p1 = i;
                 if(s.equals(word2)) p2 = i;
                 if(p1 != -1 && p2 != -1) {
