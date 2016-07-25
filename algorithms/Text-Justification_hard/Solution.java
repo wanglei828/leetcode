@@ -30,65 +30,46 @@ In this case, that line should be left-justified.
 */
 
 public class Solution {
-    List<String> res = new ArrayList<String>();
     public List<String> fullJustify(String[] words, int maxWidth) {
-        helper(words, maxWidth, 0);
-        return res;
-    }
-    
-    private void helper(String[] words, int max, int s) {
-        if(words == null) return;
-        if(s == words.length) return;
-        int e = s;
-        int sum =0;
-        for(int i=s; i<words.length; i++) {
-            if(i != s) {
-                sum += 1; // at least one space between each word.
+        List<String> res = new ArrayList<String>();
+        if(words == null || words.length == 0) return res;
+        int n = words.length;
+        int s=0, e=0;
+        while(s<n){
+            int len = -1;
+            e = s;
+            while(e<n && len+words[e].length()+1<= maxWidth) {
+                len += words[e].length() + 1;
+                e++;
             }
-            sum += words[i].length();
-            if(sum > max) {
-                e = i-1;
-                sum -=words[i].length();
-                sum--; //extra space
-                break;
-            }
-            if(i == words.length-1) {
-                e = i;
-            }
-        }
-        int spaces = max - sum;
-        StringBuilder sb = new StringBuilder();
-        if(e == s) {
+            StringBuilder sb = new StringBuilder();
             sb.append(words[s]);
-            for(int i=0; i<spaces; i++) {
-                sb.append(" ");
-            }
-        } else {
-            int cnt = e - s;
-            int ave = spaces/cnt;
-            int ext = spaces%cnt;
-            for(int i=s; i<=e; i++) {
-                if(i !=s ) {
-                    sb.append(" "); //default space
-                    if(e != words.length-1) {// if not last line.
-                        for(int j=0; j<ave; j++) {
-                            sb.append(" ");
-                        }
-                        if(ext > 0) {
-                            sb.append(" ");
-                            ext--;
-                        }
+            if(e != s+1 && e != n) {
+                int spaces = (maxWidth - len)/(e-s-1) + 1;
+                int extra =  (maxWidth - len)%(e-s-1);
+                for(int i=s+1; i<e; i++) {
+                    for(int k=0; k<spaces; k++) {
+                        sb.append(" ");
                     }
+                    if(extra >0) {
+                        sb.append(" ");
+                        extra--;
+                    }
+                    sb.append(words[i]);
                 }
-                sb.append(words[i]);
-            }
-            if(e == words.length-1) {// last line
+            } else {
+                int spaces = maxWidth - len;
+                for(int i=s+1; i<e; i++) {
+                    sb.append(" ");
+                    sb.append(words[i]);
+                }
                 for(int i=0; i<spaces; i++) {
                     sb.append(" ");
                 }
             }
+            res.add(sb.toString());
+            s = e;
         }
-        res.add(sb.toString());
-        helper(words, max, e+1);
+        return res;
     }
 }
