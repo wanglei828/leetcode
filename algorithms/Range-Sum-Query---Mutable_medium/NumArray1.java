@@ -15,10 +15,9 @@ public class NumArray {
 
     void update(int i, int val) {
         int diff = val - nums[i];
-        nums[i++] = val; 
-        while(i <= n) {
+        nums[i] = val;
+        for(i+=1; i<=n; i+=(-i&i)) {
             bit[i] += diff;
-            i += (-i&i);
         }
     }
 
@@ -27,16 +26,13 @@ public class NumArray {
     }
 
     private int getSum(int i) {
-        i++;
         int sum = 0;
-        while(i > 0) {
+        for(i +=1; i>0; i-=(-i&i)) {
             sum += bit[i];
-            i -= (-i&i);
         }
         return sum;
     }
 }
-
 
 // Your NumArray object will be instantiated and called as such:
 // NumArray numArray = new NumArray(nums);
