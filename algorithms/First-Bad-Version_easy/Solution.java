@@ -24,6 +24,6 @@ public class Solution extends VersionControl {
                 h = check+1;
             }
         }
-        return t+1;
+        return h;
     }
 }
