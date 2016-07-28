@@ -21,44 +21,16 @@ public class Solution {
     public List<List<Integer>> subsetsWithDup(int[] nums) {
         if(nums.length == 0) return res;
         Arrays.sort(nums);
-        helper(0, nums);
-        List<List<Integer>> result = new ArrayList<List<Integer>>();
-        for(List<Integer> list : res) {
-            List<Integer> newList = new ArrayList<Integer>();
-            for(Integer i:list) {
-                newList.add(nums[i]);
-            }
-            result.add(newList);
-        }
-        return result;
+        helper(0, nums, new ArrayList<Integer>());
+        return res;
     }
-    private void helper(int index, int[] nums) {
-        if(index == nums.length) {
-            List<Integer> list = new ArrayList<Integer>();
-            res.add(list);
-            return;
-        }
-        helper(index+1, nums);
-        int size = res.size();
-        for(int i=0; i<size; i++) {
-            List<Integer> list = res.get(i);
-            if(index == nums.length-1 || nums[index] != nums[index+1]) {
-                List<Integer> copy = new ArrayList<Integer>();
-                copy.add(index);
-                for(Integer k:list) {
-                    copy.add(k);
-                }
-                res.add(copy);
-            } else {
-                if(list.contains(index+1)) {
-                    List<Integer> copy = new ArrayList<Integer>();
-                    copy.add(index);
-                    for(Integer k:list) {
-                        copy.add(k);
-                    }
-                    res.add(copy);
-                }
-            }
+    private void helper(int index, int[] nums, List<Integer> cur) {
+        res.add(cur);
+        for(int i=index; i<nums.length; i++) {
+            if(i>index && nums[i] == nums[i-1]) continue;
+            List<Integer> copy = new ArrayList<Integer>(cur);
+            copy.add(nums[i]);
+            helper(i+1, nums, copy);
         }
     }
 }
