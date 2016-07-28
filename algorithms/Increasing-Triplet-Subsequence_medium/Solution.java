@@ -24,10 +24,9 @@ public class Solution {
             cur = nums[i];
             if(cur > middle) {
                 return true;
-            }
-            if(cur < middle && cur > small) {
+            } else if(cur < middle && cur > small) {
                 middle = cur;
-            } else if(cur < small) {
+            } else if( cur < small) {
                 small = cur;
             }
         }
