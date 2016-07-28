@@ -22,24 +22,15 @@ public class Solution {
     List<List<Integer>> res = new ArrayList<List<Integer>>();
     public List<List<Integer>> subsets(int[] nums) {
         if(nums == null || nums.length == 0) return res;
-        helper(nums, 0);
+        helper(nums, 0, new ArrayList<Integer>());
         return res;
     }
-    private void helper(int[] nums, int i) {
-        if(i == nums.length) {
-             res.add(new ArrayList<Integer>());
-             return;
-        }
-        helper(nums, i+1);
-        int size = res.size();
-        for(int k=0; k<size; k++) {
-            List<Integer> list = res.get(k);
-            List<Integer> copy = new ArrayList<Integer>();
+    private void helper(int[] nums, int index, List<Integer> list) {
+        res.add(list);
+        for(int i=index; i<nums.length; i++) {
+            List<Integer> copy = new ArrayList<Integer>(list);
             copy.add(nums[i]);
-            for(Integer j:list) {
-                copy.add(j);
-            }
-            res.add(copy);
+            helper(nums, i+1, copy);
         }
     }
 }
