@@ -16,15 +16,12 @@ public class Solution {
         if(nums == null || nums.length == 0) return 0;
         int index = 0;
         for(int i=0; i<nums.length; i++) {
-            if(nums[index] != val) {
-                index++;
-            } else {
-                if(nums[i] != val && nums[index] == val) {
-                    int tmp = nums[i];
-                    nums[i] = nums[index];
-                    nums[index] = tmp;
-                    index++;
+            if(nums[i] != val) {
+                if(nums[index] == val) {
+                    nums[index] = nums[i];
+                    nums[i] = val;
                 }
+                index++;
             }
         }
         return index;
