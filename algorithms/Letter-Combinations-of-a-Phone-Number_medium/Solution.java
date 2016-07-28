@@ -10,6 +10,7 @@ Although the above answer is in lexicographical order, your answer could be in a
 */
 
 public class Solution {
+    List<String> res = new ArrayList<String>();
     public List<String> letterCombinations(String digits) {
         if(digits == null || digits.length() == 0 || digits.contains("0") || digits.contains("1")) return new ArrayList<String>();
         Map<Character, String> map = new HashMap<Character, String>();
@@ -21,25 +22,21 @@ public class Solution {
         map.put('7', "pqrs");
         map.put('8', "tuv");
         map.put('9', "wxyz");
-        return helper(map, digits, 0);
+        helper(map, digits, 0, new StringBuilder());
+        return res;
     }
-    private List<String> helper(Map<Character, String> map, String digits, int start) {
-        char c = digits.charAt(start);
-        List<String> res = (start == digits.length()-1)? null : helper(map, digits, start+1);
-        String str = map.get(c);
-        List<String> result = new ArrayList<String>();
-        for(int i=0; i<str.length(); i++) {
-            if(res != null) {
-                for(int j=0; j<res.size();j++) {
-                    StringBuilder sb = new StringBuilder();
-                    sb.append(str.charAt(i));
-                    sb.append(res.get(j));
-                    result.add(sb.toString());
-                }
-            } else {
-                result.add(String.valueOf(str.charAt(i)));
-            }
+    private void helper(Map<Character, String> map, String digits, int start, StringBuilder sb) {
+        if(start == digits.length()) {
+            res.add(sb.toString());
+            return;
         }
-        return result;
+        char c = digits.charAt(start);
+        String str = map.get(c);
+        int len = sb.length();
+        for(int i=0; i<str.length(); i++) {
+            sb.append(str.charAt(i));
+            helper(map, digits, start+1, sb);
+            sb.setLength(len);
+        }
     }
 }
