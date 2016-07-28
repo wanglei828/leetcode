@@ -22,11 +22,10 @@ All root-to-leaf paths are:
  *     TreeNode(int x) { val = x; }
  * }
  */
+ 
 public class Solution {
     public List<String> binaryTreePaths(TreeNode root) {
         List<String> result = new ArrayList<String>();
-        List<String> right = null;
-        List<String> left = null;
         if (root == null) {
             return result;
         }
@@ -34,31 +33,21 @@ public class Solution {
             result.add(Integer.toString(root.val));
             return result;
         }
-        if(root.left != null) {
-            left = binaryTreePaths(root.left);
+        List<String> left = binaryTreePaths(root.left);
+        List<String> right = binaryTreePaths(root.right);
+        for(String str: left) {
+            StringBuilder sb = new StringBuilder();
+            sb.append(Integer.toString(root.val));
+            sb.append("->");
+            sb.append(str);
+            result.add(sb.toString());
         }
-        if(root.right != null) {
-            right = binaryTreePaths(root.right);
-        }
-        if(left != null) {
-            for(int i = 0; i < left.size(); i++) {
-                String item = left.get(i);
-                StringBuilder sb = new StringBuilder();
-                sb.append(Integer.toString(root.val));
-                sb.append("->");
-                sb.append(item);
-                result.add(sb.toString());
-            }
-        }
-        if(right != null) {
-            for(int i = 0; i < right.size(); i++) {
-                String item = right.get(i);
-                StringBuilder sb = new StringBuilder();
-                sb.append(Integer.toString(root.val));
-                sb.append("->");
-                sb.append(item);
-                result.add(sb.toString());
-            }
+        for(String str: right) {
+            StringBuilder sb = new StringBuilder();
+            sb.append(Integer.toString(root.val));
+            sb.append("->");
+            sb.append(str);
+            result.add(sb.toString());
         }
         return result;
     }
