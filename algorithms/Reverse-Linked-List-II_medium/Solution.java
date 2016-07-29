@@ -22,29 +22,27 @@ Given m, n satisfy the following condition:
 public class Solution {
     public ListNode reverseBetween(ListNode head, int m, int n) {
         if(head == null || m == n) return head;
-        ListNode dum = new ListNode(-1);
-        dum.next = head;
-        ListNode pre = dum;
-        while(m !=1) {
-            pre = head;
-            head = head.next;
+        ListNode res = new ListNode(0);
+        res.next = head;
+        ListNode pre = res;
+        while(m!=1) {
             m--;
             n--;
+            pre = head;
+            head = head.next;
         }
-        ListNode tail = head;
-        ListNode next = head.next;
+        ListNode bef = null;
         ListNode cur = head;
-        head = pre;
-        pre = null;
-        while(n != 0) {
+        ListNode next = null;
+        while(n !=0) {
             next = cur.next;
-            cur.next = pre;
-            pre = cur;
+            cur.next = bef;
+            bef = cur;
             cur = next;
             n--;
         }
-        head.next = pre;
-        tail.next = cur;
-        return dum.next;
+        pre.next = bef;
+        head.next = cur;
+        return res.next;
     }
 }
