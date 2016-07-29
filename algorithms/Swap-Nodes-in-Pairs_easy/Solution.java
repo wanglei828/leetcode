@@ -15,26 +15,24 @@ Your algorithm should use only constant space. You may not modify the values in 
  *     ListNode(int x) { val = x; }
  * }
  */
+ 
 public class Solution {
     public ListNode swapPairs(ListNode head) {
         if(head == null || head.next == null) return head;
         ListNode res = new ListNode(-1);
         ListNode pre = res;
-        ListNode cur = head;
-        ListNode next = cur.next;
-        while(cur != null && next != null) {
-            cur.next = next.next;
-            next.next = cur;
-            pre.next = next;
-            
-            pre = cur;
-            cur = cur.next;
-            if(cur != null) {
-                next = cur.next;
-            } else {
-                next = null;
-            }
+        ListNode p1 = head;
+        ListNode p2 = null;
+        ListNode next = null;
+        while(p1 != null && p1.next != null) {
+            p2 = p1.next;
+            next = p2.next;
+            p2.next = p1;
+            pre.next = p2;
+            pre = p1;
+            p1 = next;
         }
+        pre.next = p1;
         return res.next;
     }
 }
