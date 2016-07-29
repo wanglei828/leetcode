@@ -19,14 +19,12 @@ public class Solution {
                 swap(nums, r, i);
                 r++;
                 i++;
-                continue;
-            }
-            if(nums[i] == 2) {
+            } else if(nums[i] == 2) {
                 swap(nums, b, i);
                 b--;
-                continue;
+            } else {
+                i++;
             }
-            i++;
         }
     }
     private void swap(int[] nums, int h, int t) {
