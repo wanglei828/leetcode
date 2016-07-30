@@ -9,14 +9,22 @@ For example, the numbers "69", "88", and "818" are all strobogrammatic.
 public class Solution {
     public boolean isStrobogrammatic(String num) {
         if(num == null || num.length() == 0 ) return false;
-        char[] strArr = num.toCharArray();
-        int n = strArr.length;
-        for(int i=0; i<n; i++) {
-            if(strArr[i] == '0' && strArr[n-1-i] == '0' || strArr[i] == '1' && strArr[n-1-i] == '1' || strArr[i] == '6' && strArr[n-1-i] == '9' || strArr[i] == '8' && strArr[n-1-i] == '8' || strArr[i] == '9' && strArr[n-1-i] == '6' ) {
-                continue;
-            } else {
+        char[] c = num.toCharArray();
+        int h = 0, t = c.length-1;
+        Map<Character, Character> map = new HashMap<Character, Character>();
+        map.put('0', '0');
+        map.put('1','1');
+        map.put('6', '9');
+        map.put('8', '8');
+        map.put('9', '6');
+        while(h<=t) {
+            if(h < t && (!map.containsKey(c[h]) || map.get(c[h]) != c[t])) {
+                return false;
+            } else if(h == t && c[h] != '0' && c[h] != '1' && c[h] != '8'){
                 return false;
             }
+            h++;
+            t--;
         }
         return true;
     }
