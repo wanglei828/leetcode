@@ -32,7 +32,7 @@ public class Solution {
         q.add(list);
         while(!q.isEmpty()) {
             int count = q.size();
-            Set<String> addSet = new HashSet<String>();
+            Set<String> visit = new HashSet<String>();
             while(count > 0) {
                 List<String> cur = q.poll();
                 String str = cur.get(cur.size()-1);
@@ -51,11 +51,8 @@ public class Solution {
                                 break;
                             }
                             if(wordList.contains(tmp)) {
-                                addSet.add(tmp);
-                                List<String> copy = new ArrayList<String>();
-                                for(String s:cur) {
-                                    copy.add(s);
-                                }
+                                visit.add(tmp);
+                                List<String> copy = new ArrayList<String>(cur);
                                 copy.add(tmp);
                                 q.add(copy);
                             }
@@ -72,7 +69,7 @@ public class Solution {
             if(reach){
                 break;
             } else {
-                for(String s: addSet) {
+                for(String s: visit) {
                    wordList.remove(s); 
                 }
             }
