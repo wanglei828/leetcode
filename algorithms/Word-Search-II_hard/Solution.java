@@ -40,13 +40,13 @@ public class Solution {
         return res;
     }
     
-    private void find(char[][] board, int i, int j, Trie root) {
+    private void find(char[][] board, int i, int j, Trie cur) {
         char c = board[i][j];
-        if(c == '#' || root.next[c-'a'] == null) return;
-        root = root.next[c-'a'];
-        if(root.word != null) {
-            res.add(root.word);
-            root.word = null;
+        if(c == '#' || cur.next[c-'a'] == null) return;
+        cur = cur.next[c-'a'];
+        if(cur.word != null) {
+            res.add(cur.word);
+            cur.word = null;
         }
         board[i][j] = '#';
         int[][] dir = {{-1, 0}, {1, 0}, {0, 1}, {0, -1}};
@@ -54,7 +54,7 @@ public class Solution {
             int x = i+dir[k][0];
             int y = j+dir[k][1];
             if(x>=0 && x < board.length && y>=0 && y<board[0].length) {
-                find(board, x, y, root);
+                find(board, x, y, cur);
             }
         }
         board[i][j] = c;
