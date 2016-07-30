@@ -12,9 +12,6 @@ When s3 = "aadbbbaccc", return false.
 
 public class Solution {
     public boolean isInterleave(String s1, String s2, String s3) {
-        if( s1 == null || s1.length() == 0) return ((s2 == null && s3 == null) || (s2 != null && s2.equals(s3)));
-        if( s2 == null || s2.length() == 0) return ((s1 == null && s3 == null) || (s1 != null && s1.equals(s3)));
-        if( s3 == null || s3.length() == 0) return ((s1 == null && s2 == null) || (s1.length() == 0 && s2.length() == 0) );
         if(s1.length() + s2.length() != s3.length()) return false;
         int m = s1.length();
         int n = s2.length();
