@@ -26,7 +26,8 @@ the initial health of the knight must be at least 7 if he follows the optimal pa
 Notes:
 
 The knight's health has no upper bound.
-Any room can contain threats or power-ups, even the first room the knight enters and the bottom-right room where the princess is imprisoned.
+Any room can contain threats or power-ups, even the first room the knight enters and the bottom-right room 
+where the princess is imprisoned.
 */
 
 public class Solution {
