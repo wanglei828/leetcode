@@ -6,11 +6,11 @@ public class Solution {
             return res;
         }
         char[] strArr = s.toCharArray();
-        helperFront(strArr, 0);
+        helperFront(strArr, 0, -1);
         return res;
     }
     
-    private void helperFront(char[] arr, int start) {
+    private void helperFront(char[] arr, int start, int last) {
         int left = 0;
         int right = 0;
         int cur = start;
@@ -27,20 +27,20 @@ public class Solution {
             }
         }
         if(i == arr.length) {
-            helperEnd(arr, i-1);
+            helperEnd(arr, i-1, arr.length);
             return;
         }
         for(i=0; i<=cur; i++) {
             if(arr[i] == ')') {
-                if(i>0 && arr[i-1] == ')') continue;
+                if(i>0 && arr[i-1] == ')' || i <= last) continue;
                 arr[i] = '\0';
-                helperFront(arr, cur+1);
+                helperFront(arr, cur+1, i);
                 arr[i] = ')';
             }
         }
     }
     
-    private void helperEnd(char[] arr, int end) {
+    private void helperEnd(char[] arr, int end, int last) {
         int left = 0;
         int right = 0;
         int cur = end;
@@ -63,16 +63,14 @@ public class Solution {
                     sb.append(arr[j]);
                 }
             }
-            if(!res.contains(sb.toString())) {
-                res.add(sb.toString());
-            }
+            res.add((sb.length()==0)? "" : sb.toString());
             return;
         }
         for(i=arr.length-1; i>=cur; i--) {
             if(arr[i] == '(') {
-                if(i<arr.length-1 && arr[i+1] == '(') continue;
+                if(i<arr.length-1 && arr[i+1] == '(' || i >= last) continue;
                 arr[i] = '\0';
-                helperEnd(arr, cur-1);
+                helperEnd(arr, cur-1, i);
                 arr[i] = '(';
             }
         }
