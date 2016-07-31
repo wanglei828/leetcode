@@ -21,8 +21,8 @@ isMatch("aab", "c*a*b") → true
 
 public class Solution {
     public boolean isMatch(String s, String p) {
-        if(s == null) return p == null;
-        if(p == null) return s == null;
+        if(s == null && p == null) return true;
+        if(s == null || p == null) return false;
         if(p.length() == 0) return s.length() == 0;
         if(s.length() == 0) {
             int j=0;
@@ -55,15 +55,10 @@ public class Solution {
         } else {
             if(isMatch(s, p.substring(2))) {
                 return true;
+            } else {
+                return (s.charAt(0) == p.charAt(0) || p.charAt(0) == '.') && isMatch(s.substring(1), p);
             }
-            int i=0;
-            while(i < s.length() && (s.charAt(i) == p.charAt(0) || p.charAt(0) == '.')) {
-                if(isMatch(s.substring(i+1), p.substring(2)) ){
-                    return true;
-                }
-                i++;
-            }
+
         }
-        return false;
     }
 }
