@@ -26,7 +26,7 @@ public class Solution {
             } else {
                 int h = 0;
                 int t = v.size()-1;
-                while(h<t) {
+                while(h<=t) {
                     int m = h+(t-h)/2;
                     if(v.get(m) >= tmp) {
                         t = m-1;
@@ -34,13 +34,8 @@ public class Solution {
                         h = m+1;
                     }
                 }
-                if(v.get(h) >= tmp) {
-                    v.add(h, tmp);
-                    res.add(0, h);
-                } else {
-                    v.add(h+1, tmp);
-                    res.add(0, h+1);
-                }
+                v.add(h, tmp);
+                res.add(0, h);
             }
         }
         return res;
