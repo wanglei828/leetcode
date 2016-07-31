@@ -35,7 +35,7 @@ public class Solution {
         for(int i=0; i<matrix.length; i++) {
             for(int j=0; j<matrix[0].length; j++) {
                 if(dp[i][j] == 0) {
-                    dp[i][j] = helper(matrix, i, j, 1, dp);
+                    dp[i][j] = helper(matrix, i, j, dp);
                 }
                 max = Math.max(max, dp[i][j]);
             }
@@ -43,32 +43,17 @@ public class Solution {
         return max;
     }
     
-    private int helper(int[][] matrix, int i, int j, int count, int[][] dp) {
-        //if(i<0 || i>=matrix.length || j<0 || j>=matrix[0].length) return ;
-        int max = count;
-        if(i> 0 && matrix[i][j] < matrix[i-1][j]) {
-            if(dp[i-1][j] == 0) {
-                dp[i-1][j] = helper(matrix, i-1, j, 1 ,dp);
+    private int helper(int[][] matrix, int i, int j, int[][] dp) {
+        if(dp[i][j] != 0) return dp[i][j];
+        int max = 1;
+        int[][] dir = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
+        for(int k=0; k<4; k++) {
+            int x = i + dir[k][0];
+            int y = j + dir[k][1];
+            if(x>=0 && x<matrix.length && y>=0 && y<matrix[0].length && matrix[x][y] > matrix[i][j]) {
+                dp[x][y] = helper(matrix, x, y, dp);
+                max = Math.max(max, dp[x][y] + 1);
             }
-            max = Math.max(count + dp[i-1][j], max);
-        }
-        if(i < matrix.length-1 && matrix[i][j] < matrix[i+1][j]) {
-            if(dp[i+1][j] == 0) {
-                dp[i+1][j] = helper(matrix, i+1, j, 1, dp);
-            }
-            max = Math.max(count + dp[i+1][j], max);
-        }
-        if(j < matrix[0].length-1 && matrix[i][j] < matrix[i][j+1]) {
-            if(dp[i][j+1] == 0) {
-                dp[i][j+1] = helper(matrix, i, j+1, 1, dp);
-            }
-            max = Math.max(count + dp[i][j+1], max);
-        }
-         if(j >0 && matrix[i][j] < matrix[i][j-1]) {
-            if(dp[i][j-1] == 0) {
-                dp[i][j-1] = helper(matrix, i, j-1, 1, dp);
-            }
-            max = Math.max(count + dp[i][j-1], max);
         }
         return max;
     }
