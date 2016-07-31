@@ -25,40 +25,23 @@ public class Solution {
         if(s == null || p == null) return false;
         if(p.length() == 0) return s.length() == 0;
         if(s.length() == 0) {
-            int j=0;
+            int j = 0;
             while(j<p.length()) {
                 if(p.charAt(j) != '*') {
-                    if(j<p.length()-1 && p.charAt(j+1) == '*'){
-                        j += 2;
+                    if(j<p.length()-1 && p.charAt(j+1) == '*') {
+                        j++;
                     } else {
                         return false;
                     }
-                } else {
-                    j++;
                 }
+                j++;
             }
+            return true;
         }
-        
-        if(p.length() == 1) {
-            if(s.charAt(0) == p.charAt(0) ||  p.charAt(0) == '.') {
-                return isMatch(s.substring(1), p.substring(1));
-            } else {
-                return false;
-            }
-        }
-        if(p.charAt(1) != '*') {
-            if(s.charAt(0) == p.charAt(0) ||  p.charAt(0) == '.') {
-                return isMatch(s.substring(1), p.substring(1));
-            } else {
-                return false;
-            }            
+        if(p.length() == 1 || p.charAt(1) != '*') {
+            return  (p.charAt(0) == s.charAt(0) || p.charAt(0) == '.') && isMatch(s.substring(1), p.substring(1));
         } else {
-            if(isMatch(s, p.substring(2))) {
-                return true;
-            } else {
-                return (s.charAt(0) == p.charAt(0) || p.charAt(0) == '.') && isMatch(s.substring(1), p);
-            }
-
+            return isMatch(s, p.substring(2)) || (p.charAt(0) == s.charAt(0) || p.charAt(0) == '.') && isMatch(s.substring(1), p);
         }
     }
 }
