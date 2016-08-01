@@ -23,11 +23,10 @@ public class Solution {
             if(map.containsKey(c) && map.get(c) >= start) {
                 start = map.get(c)+1;
                 map.put(c, i);
-                max = Math.max(max, i-start+1);
             } else {
                 map.put(c, i);
-                max = Math.max(max, i-start+1);
             }
+            max = Math.max(max, i-start+1);
         }
         return max;
     }
