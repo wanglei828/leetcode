@@ -44,9 +44,9 @@ public class Solution {
                                 q.add(tmp);
                                 wordList.remove(tmp);
                             }
-                            carry[i] = c;
                         }
                     }
+                    carry[i] = c;
                 }
                 count--;
             }
