@@ -42,13 +42,13 @@ public class Solution {
                         h++;
                         t--;
                         while(h<t && nums[h] == nums[h-1]) h++;
-                        while(h<t && t<n-1 && nums[t] == nums[t+1]) t--;                        
+                        while(h<t && nums[t] == nums[t+1]) t--;                        
                     } else if(sum < target) {
                         h++;
                         while(h<t && nums[h] == nums[h-1]) h++;
                     } else {
                         t--;
-                        while(h<t && t<n-1 && nums[t] == nums[t+1]) t--;
+                        while(h<t && nums[t] == nums[t+1]) t--;
                     }
                 }
             }
