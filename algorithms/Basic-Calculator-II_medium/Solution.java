@@ -15,7 +15,7 @@ Some examples:
 public class Solution {
    public int calculate(String s) {
 	if(s == null || s.length() == 0) return 0;
-        s = s.replaceAll(" ", "") + '#';
+        s = s.replaceAll(" ", "") + "#";
         char op = '+';
         int res = 0;
         int start = 0;
