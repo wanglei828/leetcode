@@ -19,23 +19,17 @@ public class Solution {
         Map<Character, String> fmap = new HashMap<Character, String>();
         Map<String, Character> bmap = new HashMap<String, Character>();
         for(int i=0; i<strArr.length; i++) {
-            String  tar = strArr[i];
-            String src = null;
             char p = pattern.charAt(i);
-            if(fmap.containsKey(p)) {
-                src = fmap.get(p);
-            }
-            if(src != null) {
-                if(!src.equals(tar)) {
+            String s = strArr[i];
+            if(fmap.containsKey(p) && bmap.containsKey(s)) {
+                if(!fmap.get(p).equals(s) || bmap.get(s) != p) {
                     return false;
-                }
+                } 
+            } else if(!fmap.containsKey(p) && !bmap.containsKey(s)) {
+                fmap.put(p, s);
+                bmap.put(s, p);
             } else {
-                if(bmap.containsKey(tar)) {
-                    return false;
-                } else {
-                    fmap.put(p, tar);
-                    bmap.put(tar, p);
-                }
+                return false;
             }
         }
         return true;
