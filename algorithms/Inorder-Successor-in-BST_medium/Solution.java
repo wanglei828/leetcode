@@ -34,8 +34,10 @@ public class Solution {
     private TreeNode findParent(TreeNode root, TreeNode p) {
         if(root == null || root == p) return null;
         if(root.right == p || root.left == p) return root;
-        TreeNode left = findParent(root.left, p);
-        TreeNode right = findParent(root.right, p);
-        return (left == null)? right : left;
+        if(root.val < p.val) {
+            return findParent(root.right, p);
+        } else {
+            return findParent(root.left, p);
+        }
     }
 }
