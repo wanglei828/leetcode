@@ -18,26 +18,20 @@ public class Solution {
         if(s == null && t == null) return true;
         if(s == null || t == null) return false;
         if(s.length() != t.length()) return false;
-        Map<Character, Character> mapS = new HashMap<Character, Character>();
-        Map<Character, Character> mapT = new HashMap<Character, Character>();
+        Map<Character, Character> maps = new HashMap<Character, Character>();
+        Map<Character, Character> mapt = new HashMap<Character, Character>();
         for(int i = 0; i < s.length(); i++) {
             char src = s.charAt(i);
             char tar = t.charAt(i);
-            if(mapS.containsKey(s.charAt(i))) {
-                src = mapS.get(src);
-            }
-            if (src != tar) {
-                if(mapS.containsKey(s.charAt(i)) || mapT.containsKey(tar)) {
+            if(maps.containsKey(src) && mapt.containsKey(tar)) {
+                if(maps.get(src) != tar || mapt.get(tar) != src) {
                     return false;
-                } else {
-                    mapS.put(src, tar);
-                    mapT.put(tar, src);
                 }
+            } else if(!maps.containsKey(src) && !mapt.containsKey(tar)) {
+                maps.put(src, tar);
+                mapt.put(tar, src);
             } else {
-                if(!mapS.containsKey(s.charAt(i))) {
-                    mapS.put(s.charAt(i), tar);
-                    mapT.put(tar, s.charAt(i));
-                }
+                return false;
             }
         }
         return true;
