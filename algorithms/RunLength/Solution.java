@@ -43,11 +43,11 @@ public class Solution {
     	return sb.toString();
     }
     
-	public static void main(String[] args) {
-		String s1 = "aaaabbbccccccc";
-		String s2 = "4a10b6c";
-		System.out.println(encode(s1));
-		System.out.println(decode(s2));
-		System.out.println("Done");
-	}
+    public static void main(String[] args) {
+	String s1 = "aaaabbbccccccc";
+	String s2 = "4a10b6c";
+	System.out.println(encode(s1));
+	System.out.println(decode(s2));
+	System.out.println("Done");
+    }
 }
