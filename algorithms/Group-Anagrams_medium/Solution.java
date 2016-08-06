@@ -20,19 +20,15 @@ public class Solution {
         for(int i=0; i<strs.length; i++) {
             char[] arr = strs[i].toCharArray();
             Arrays.sort(arr);
-            String key = new String(arr);
-            if(map.containsKey(key)) {
-                map.get(key).add(strs[i]);
-            } else {
-                List<String> list = new ArrayList<String>();
-                list.add(strs[i]);
-                map.put(key, list);
+            String key = String.valueOf(arr);
+            if(!map.containsKey(key)) {
+                map.put(key, new ArrayList<String>());
             }
+            map.get(key).add(strs[i]);
         }
         for(String key : map.keySet()) {
-            List<String> tmp = map.get(key);
-            Collections.sort(tmp);
-            res.add(tmp);
+            Collections.sort(map.get(key));
+            res.add(map.get(key));
         }
         return res;
     }
