@@ -46,10 +46,7 @@ public class Solution {
                 }
             }
             if(cur == -1) break;
-            int[] tmp = new int[2];
-            tmp[0] = nums1[cur];
-            tmp[1] = nums2[index[cur]];
-            res.add(tmp);
+            res.add(new int[]{nums1[cur], nums2[index[cur]]});
             index[cur]++;
             k--;
         }
