@@ -19,20 +19,17 @@ public class Solution {
     public List<List<Integer>> combinationSum(int[] candidates, int target) {
         if(candidates == null || candidates.length == 0) return res;
         Arrays.sort(candidates);
-        helper(candidates, 0, target, null);
+        List<Integer> list = new ArrayList<Integer>();
+        helper(candidates, 0, target, list);
         return res;
     }
     
     private void helper(int[] nums, int start, int target, List<Integer> list) {
-        if(target == 0 && list != null) {
-            List<Integer> copy = new ArrayList<Integer>();
-            for(Integer item: list) {
-                copy.add(item);
-            }
+        if(target == 0) {
+            List<Integer> copy = new ArrayList<Integer>(list);
             res.add(copy);
             return;
         }
-        list = (list != null)? list: new ArrayList<Integer>();
         int size = list.size();
         for(int i=start; i< nums.length; i++) {
             if(target < nums[i]) break;
