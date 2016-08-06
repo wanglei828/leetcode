@@ -7,7 +7,7 @@ You may assume that all inputs are consist of lowercase letters a-z.
 
 class TrieNode {
     TrieNode[] next;
-    boolean isEnd;
+    String word;
     // Initialize your data structure here.
     public TrieNode() {
         next = new TrieNode[26];
@@ -36,7 +36,7 @@ public class Trie {
                 tmp = newNode;
             }
         }
-        tmp.isEnd = true;
+        tmp.isEnd = word;
     }
 
     // Returns if the word is in the trie.
@@ -50,7 +50,7 @@ public class Trie {
                 tmp = tmp.next[c-'a'];
             }
         }
-        return tmp.isEnd;
+        return tmp.word != null;
     }
 
     // Returns if there is any word in the trie
@@ -67,6 +67,34 @@ public class Trie {
         }
         return true;       
     }
+    
+    //return all the words with same prefix
+    public static List<String> findPrefix(String prefix) {
+    	List<String> res = new ArrayList<String>();
+        TrieNode cur = root;
+        for(int i=0; i<prefix.length(); i++) {
+            char c = prefix.charAt(i);
+            if(cur.next[c-'a'] == null) {
+                return res;
+            } else {
+                cur = cur.next[c-'a'];
+            }
+        }
+        Queue<TrieNode> q = new LinkedList<TrieNode>();
+        q.add(cur);
+        while(!q.isEmpty()) {
+        	TrieNode node = q.poll();
+        	if(node.word != null) {
+        		res.add(node.word);
+        	}
+        	for(TrieNode n : node.next) {
+        		if(n != null) {
+        			q.add(n);
+        		}
+        	}
+        }
+        return res;
+    }    
 }
 
 // Your Trie object will be instantiated and called as such:
