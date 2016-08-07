@@ -31,31 +31,25 @@ Visually, the graph looks like the following:
  *     UndirectedGraphNode(int x) { label = x; neighbors = new ArrayList<UndirectedGraphNode>(); }
  * };
  */
+ 
 public class Solution {
     public UndirectedGraphNode cloneGraph(UndirectedGraphNode node) {
         if(node == null) return null;
         Map<Integer, UndirectedGraphNode> map = new HashMap<Integer, UndirectedGraphNode>();
         Queue<UndirectedGraphNode> q = new LinkedList<UndirectedGraphNode>();
         q.add(node);
-        UndirectedGraphNode newNode = new UndirectedGraphNode(node.label);
-        map.put(node.label, newNode);
+        map.put(node.label, new UndirectedGraphNode(node.label));
         while(!q.isEmpty()) {
-            UndirectedGraphNode tmp = q.poll();
-            UndirectedGraphNode copy = map.get(tmp.label);
-            for(UndirectedGraphNode item : tmp.neighbors) {
-                UndirectedGraphNode newItem = null;
-                if(map.containsKey(item.label)) {
-                    newItem = map.get(item.label);
-                    copy.neighbors.add(newItem);
-                } else {
-                    newItem = new UndirectedGraphNode(item.label);
-                    map.put(item.label, newItem);
-                    copy.neighbors.add(newItem);
-                    q.add(item);                   
+            UndirectedGraphNode cur = q.poll();
+            UndirectedGraphNode copy = map.get(cur.label);
+            for(UndirectedGraphNode item : cur.neighbors) {
+                if(!map.containsKey(item.label)) {
+                    map.put(item.label, new UndirectedGraphNode(item.label));
+                    q.add(item);
                 }
+                copy.neighbors.add(map.get(item.label));
             }
         }
         return map.get(node.label);
     }
-
 }
