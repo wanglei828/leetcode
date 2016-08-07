@@ -12,7 +12,7 @@ class TreeNode {
 
 public class Solution {
   public TreeNode DeleteNode(TreeNode root, int key) {
-    if(root == null) return false;
+    if(root == null) return null;
     if(key < root.val) {
       root.left = DeleteNode(root.left, key);
     } else if(key > root.val) {
