@@ -29,6 +29,19 @@ public class Solution {
     }
     return root;
   }
+  
+  public TreeNode AddNode(TreeNode root, int val) {
+    if(root == null) {
+      root = new TreeNode(val);
+      return root;
+    }
+    if(val < root.val) {
+      root.left = AddNode(root.left, val);
+    } else {
+      root.right = AddNode(root.right, val);
+    }
+    return root;
+  }
 
   private int minValue(TreeNode node) {
     int  min = node.val;
