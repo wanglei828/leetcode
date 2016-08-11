@@ -45,7 +45,7 @@ public class Solution {
         }
         if(i == lns) {
             while(j<lnp && p.charAt(j) == '*') j++;
-            return (j == lnp)? true : false;
+            return j == lnp;
         } else {
             return false;
         }
