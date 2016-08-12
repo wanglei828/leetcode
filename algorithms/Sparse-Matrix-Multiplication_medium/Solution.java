@@ -35,26 +35,20 @@ public class Solution {
         for(int i=0; i<m; i++) {
             for(int j=0; j<n; j++) {
                 if(A[i][j] != 0) {
-                    if(mapA.containsKey(i)) {
-                        mapA.get(i).put(j, A[i][j]);
-                    } else {
-                        Map<Integer, Integer> map = new HashMap<Integer, Integer>();
-                        map.put(j, A[i][j]);
-                        mapA.put(i, map);
+                    if(!mapA.containsKey(i)) {
+                        mapA.put(i, new HashMap<Integer, Integer>());
                     }
+                    mapA.get(i).put(j, A[i][j]);
                 }
             }
         }
         for(int i=0; i<n; i++) {
             for(int j=0; j<l; j++) {
                 if(B[i][j] != 0) {
-                    if(mapB.containsKey(i)) {
-                        mapB.get(i).put(j, B[i][j]);
-                    } else {
-                        Map<Integer, Integer> map = new HashMap<Integer, Integer>();
-                        map.put(j, B[i][j]);
-                        mapB.put(i, map);
+                    if(!mapB.containsKey(i)) {
+                        mapB.put(i, new HashMap<Integer, Integer>());
                     }
+                    mapB.get(i).put(j, B[i][j]);
                 }
             }
         }
