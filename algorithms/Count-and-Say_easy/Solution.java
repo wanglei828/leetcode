@@ -21,20 +21,15 @@ public class Solution {
         for(int i=0; i < pre.length()-1; i++) {
             if(pre.charAt(i) == pre.charAt(i+1)) {
                 count++;
-                if(i == pre.length()-2) {
-                    sb.append(Integer.toString(count));
-                    sb.append(Character.toString(pre.charAt(i)));
-                    break;
-                }
             } else {
                 sb.append(Integer.toString(count));
                 sb.append(Character.toString(pre.charAt(i)));
                 count = 1;
-                if(i == pre.length()-2) {
-                    sb.append(Integer.toString(count));
-                    sb.append(Character.toString(pre.charAt(i+1)));
-                    break;
-                }
+            }
+            if(i == pre.length()-2) {
+                sb.append(Integer.toString(count));
+                sb.append(Character.toString(pre.charAt(i+1)));
+                break;
             }
         }
         return sb.toString();
