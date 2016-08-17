@@ -44,14 +44,10 @@ public class Solution {
                 char c1 = str1.charAt(j);
                 char c2 = str2.charAt(j);
                 if(c1 != c2) {
-                    if(map.containsKey(c1)) {
-                        if(map.get(c1).add(c2)) {
-                            status[c2-'a']++;
-                        }
-                    } else {
-                        Set<Character> set = new HashSet<Character>();
-                        set.add(c2);
-                        map.put(c1, set);
+                    if(!map.containsKey(c1)) {
+                        map.put(c1, new HashSet<Character>());
+                    }
+                    if(map.get(c1).add(c2)) {
                         status[c2-'a']++;
                     }
                     break;
