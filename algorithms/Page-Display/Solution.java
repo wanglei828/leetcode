@@ -18,7 +18,7 @@ public class Solution {
 			if(visit.size() == 12 || !iter.hasNext()) {
 				iter = input.iterator();
 				visit.clear();
-				if(!input.isEmpty()) {
+				if(iter.hasNext()) {
 					page++;
 					System.out.println("Page " + page);					
 				}
