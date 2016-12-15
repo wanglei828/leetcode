@@ -17,7 +17,6 @@ public class Solution {
     int m = matrix.length;
     int n = matrix[0].length;
     int[][] dp = new int[m][n];
-    int[] dp = new int[m];
     for(int i=0; i<m; i++) {
       dp[i][0] = matrix[i][0];
     }
