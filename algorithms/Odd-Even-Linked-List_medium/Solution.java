@@ -25,20 +25,37 @@ Credits:
  * }
  */
 public class Solution {
-    public ListNode oddEvenList(ListNode head) {
-        if(head == null) return null;
-        ListNode res = head;
-        ListNode odd = head;
-        ListNode even = head.next;
-        ListNode evenH = head.next;
-        while(odd!= null && even != null) {
-            if(even.next == null)  break;
-            odd.next = even.next;
-            odd = even.next;
-            even.next = odd.next;
-            even = odd.next;
+    public ListNode insertionSortList(ListNode head) {
+        if(head == null) return head;
+        ListNode evenH = null;
+        ListNode even = null;
+        ListNode oddH = null;
+        ListNode odd = null;
+        int round = 0;
+        while(head != null) {
+           if (round == 0) {
+             if (even == null) {
+                even = head;
+                evenH = head;
+             } else {
+                even.next = head;
+                even = even.next;
+             }
+             round = 1;
+           } else {
+             if (odd == null) {
+                odd = head;
+                oddH = head;
+             } else {
+                odd.next = head;
+                odd = odd.next;
+             }
+             round = 0;
+           }
+           head = head.next;
         }
-        odd.next = evenH;
-        return res;
+        even.next = oddH;
+        odd.next = null;
+        return evenH;
     }
 }
