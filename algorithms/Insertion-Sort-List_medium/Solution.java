@@ -27,14 +27,14 @@ public class Solution {
                 } else {
                     pre.next = head;
                     head = head.next;
-                    head.next = cur;
+                    pre.next.next = cur;
                     break;
                 }
             }
             if(cur == null) {
                 pre.next = head;
                 head = head.next;
-                head.next = cur;
+                pre.next.next = cur;
             }
         }
         return res.next;
