@@ -14,22 +14,19 @@ public class Solution {
     
     private TreeNode helper(TreeNode root) {
         if(root == null) return null;
-        TreeNode right = root.right;
-        TreeNode left = root.left;
-        root.right = null;
-        root.left = null;
-        if(right == null && left == null) {
+        if(root.left == null && root.right == null) {
             return root;
         }
-        TreeNode rl = helper(left);
-        TreeNode rr = helper(right);
+        TreeNode left = helper(root.left);
+        TreeNode right = helper(root.right);
+        root.left = null;
         TreeNode cur = root;
-        while(rl != null) {
-            cur.right = rl;
-            cur = rl;
-            rl = rl.right;
+        while(left != null) {
+            cur.right = left;
+            cur = left;
+            left = left.right;
         }
-        cur.right = rr;
+        cur.right = right;
         return root;
     }
 }
