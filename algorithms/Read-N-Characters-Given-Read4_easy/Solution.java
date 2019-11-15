@@ -16,19 +16,14 @@ public class Solution extends Reader4 {
      * @return    The number of characters read
      */
     public int read(char[] buf, int n) {
+        int sum = 0, cnt = 0;
         char[] tmp = new char[4];
-        int sum = 0;
-        int cnt = 0;
-        int ptr = 0;
         while(sum < n) {
             cnt = read4(tmp);
             if(cnt == 0) break;
-            while(sum<n) {
-                buf[sum++] = tmp[ptr++];
-                if(ptr == cnt) {
-                    ptr = 0;
-                    break;
-                }
+            int i=0;
+            while(sum<n && i<cnt) {
+                buf[sum++] = tmp[i++];
             }
         }
         return sum;
