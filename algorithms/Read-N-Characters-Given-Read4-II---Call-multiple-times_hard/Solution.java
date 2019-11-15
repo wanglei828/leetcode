@@ -19,23 +19,19 @@ public class Solution extends Reader4 {
      * @param n   Maximum number of characters to read
      * @return    The number of characters read
      */
-    private char[] rf = new char[4];
-    private int bufptr = 0;
-    private int bufcnt = 0;
+    private int ptr = 0, cnt = 0;
+    private char[] tmp = new char[4];
     public int read(char[] buf, int n) {
         int sum = 0;
         while(sum<n) {
-            if(bufptr == 0) {
-                bufcnt = read4(rf);
+            if(ptr == 0) {
+                cnt = read4(tmp); 
             }
-            if(bufcnt == 0) break;
-            while(sum<n) {
-                buf[sum++] = rf[bufptr++];
-                if(bufptr == bufcnt) {
-                    bufptr = 0;
-                    break;
-                }
+            if(cnt == 0) break;
+            while(sum<n && ptr<cnt) {
+                buf[sum++] = tmp[ptr++];
             }
+            if(ptr == cnt) ptr = 0;
         }
         return sum;
     }
