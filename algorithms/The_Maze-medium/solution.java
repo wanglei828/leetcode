@@ -59,6 +59,7 @@ The maze contains at least 2 empty spaces, and both the width and height of the 
 
 class Solution {
     Set<Integer> visited = new HashSet<>();
+    int[][] dirs = new int[][]{{-1, 0}, {0, 1}, {1, 0}, {0, -1}};
     public boolean hasPath(int[][] maze, int[] start, int[] destination) {
         return dfs(maze, start, destination);
     }
@@ -69,29 +70,17 @@ class Solution {
         if(start[0] == destination[0] && start[1] == destination[1]) {
             return true;
         }
-        int r = start[0];
-        int c = start[1];
-        while(r>=0 && maze[r][c] == 0) r--;
-        if(dfs(maze, new int[]{r+1, c}, destination)) {
-            return true;
-        }
-        r = start[0];
-        c = start[1];
-        while(r<maze.length && maze[r][c] == 0) r++;
-        if(dfs(maze, new int[]{r-1, c}, destination)) {
-            return true;
-        }
-        r = start[0];
-        c = start[1];
-        while(c>=0 && maze[r][c] == 0) c--;
-        if(dfs(maze, new int[]{r, c+1}, destination)) {
-            return true;
-        }
-        r = start[0];
-        c = start[1];
-        while(c<maze[0].length && maze[r][c] == 0) c++;
-        if(dfs(maze, new int[]{r, c-1}, destination)) {
-            return true;
+        for(int i=0; i<4; i++) {
+            int[] dir = dirs[i];
+            int r = start[0];
+            int c = start[1];
+            while(r>=0 && r<maze.length && c>=0 && c<maze[0].length && maze[r][c] == 0) {
+                r += dir[0];
+                c += dir[1];
+            }
+            if(dfs(maze, new int[]{r-dir[0], c-dir[1]}, destination)) {
+                return true;
+            }
         }
         return false;
     }
