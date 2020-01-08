@@ -25,7 +25,7 @@ public class Solution {
         if(nums == null || nums.length == 0) return new int[0];
         int n = nums.length;
         int[] res = new int[n-k+1];
-        LinkedList<Integer> q = new LinkedList<Integer>();
+        Deque<Integer> q = new LinkedList<Integer>();
         q.add(nums[0]);
         for(int i=1; i<k; i++) {
             int tmp = nums[i];
@@ -37,26 +37,16 @@ public class Solution {
         res[0] = q.peek();
         for(int i=k; i<n; i++) {
             int tmp = nums[i];
-            int curMax = q.peek();
-            if(nums[i-k] == curMax) {
+            if(nums[i-k] == q.peek()) {
                 q.poll();
             }
             if(!q.isEmpty()) {
-                curMax = q.peek();
-                if(curMax <= tmp) {
-                    res[i-k+1] = tmp;
-                } else {
-                    res[i-k+1] = curMax;
-                }
                 while(!q.isEmpty() && q.peekLast() < tmp) {
                     q.pollLast();
                 }
-                q.add(tmp);
-            } else {
-                res[i-k+1] = tmp;
-                q.add(tmp);
             }
-
+            q.add(tmp);
+            res[i-k+1] = q.peek();
         }
         return res;
     }
