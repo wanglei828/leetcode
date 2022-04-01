@@ -52,10 +52,7 @@ sequences[i] is a subsequence of nums.
 
 class Solution {
     public boolean sequenceReconstruction(int[] nums, List<List<Integer>> sequences) {
-        int n = 0; 
-        for (int i : nums) {
-            n = Math.max(n, i);
-        }
+        int n = nums.length;
         int[] cnt = new int[n+1];
         Map<Integer, Set<Integer>> map = new HashMap<>();
         for (List<Integer> list : sequences) {
