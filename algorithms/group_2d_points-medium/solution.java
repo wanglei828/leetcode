@@ -15,8 +15,7 @@ class solution {
         for (int i = 0; i < n; i++) {
             double x = points[i][0];
             double y = points[i][1];
-            for (int j = 0; j < n; j++) {
-                if (i == j) continue;
+            for (int j = i+1; j < n; j++) {
                 double xj = points[j][0];
                 double yj = points[j][1];
                 if (x*xj + y*yj <= k*k) {
