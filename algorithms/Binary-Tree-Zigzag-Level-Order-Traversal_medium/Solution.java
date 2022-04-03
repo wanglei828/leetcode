@@ -27,41 +27,31 @@ return its zigzag level order traversal as:
  */
 public class Solution {
     public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
-        List<List<Integer>> res = new ArrayList<List<Integer>>();
-        if(root == null) return res;
-        Stack<TreeNode> sl = new Stack<TreeNode>();
-        Stack<TreeNode> sr = new Stack<TreeNode>();
-        sl.add(root);
-        List<Integer> list = new ArrayList<Integer>();
-        while(!sl.isEmpty() || !sr.isEmpty()) {
-            while(!sl.isEmpty()) {
-                TreeNode tmp = sl.pop();
-                if(tmp.left != null) {
-                    sr.push(tmp.left);
+        List<List<Integer>> res = new ArrayList<>();
+        if (root == null) return res;
+        Queue<TreeNode> q = new LinkedList<>();
+        q.add(root);
+        LinkedList<Integer> list;
+        boolean fromLeft = true;
+        while (!q.isEmpty()) {
+            int size = q.size();
+            list = new LinkedList<>();
+            for (int i = 0; i < size; i++) {
+                TreeNode cur = q.poll();
+                if (fromLeft) {
+                    list.addLast(cur.val);
+                } else {
+                    list.addFirst(cur.val);
                 }
-                if(tmp.right != null) {
-                    sr.push(tmp.right);
+                if (cur.left != null) {
+                    q.add(cur.left);
                 }
-                list.add(tmp.val);
-            }
-            if(list.size() > 0) {
-                res.add(list);
-                list = new ArrayList<Integer>();
-            }
-            while(!sr.isEmpty()) {
-                TreeNode tmp = sr.pop();
-                if(tmp.right != null) {
-                    sl.push(tmp.right);
+                if (cur.right != null) {
+                    q.add(cur.right);
                 }
-                if(tmp.left != null) {
-                    sl.push(tmp.left);
-                }
-                list.add(tmp.val);
             }
-            if(list.size() > 0) {
-                res.add(list);
-                list = new ArrayList<Integer>();
-            }
+            res.add(list);
+            fromLeft = !fromLeft;
         }
         return res;
     }
