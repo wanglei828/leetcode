@@ -39,34 +39,24 @@ After calling your function, the tree should look like:
  */
 public class Solution {
     public void connect(TreeLinkNode root) {
-        TreeLinkNode head = root;
-        TreeLinkNode iter = null;
-        while(head != null) {
-            iter = head;
-            head = null;
-            root = null;
-            while(iter != null) {
-                if(iter.left != null) {
-                    if(head == null) {
-                        head = iter.left;
-                        root = head;
-                    } else {
-                        head.next = iter.left;
-                        head = head.next;
-                    }
+        if (root == null) return null;
+        Queue<Node> q = new LinkedList<>();
+        q.add(root);
+        while (!q.isEmpty()) {
+            int size = q.size();
+            for (int i = 0; i < size; i++) {
+                Node cur = q.poll();
+                if (i < size -1) {
+                    cur.next = q.peek();
                 }
-                if(iter.right != null) {
-                    if(head == null) {
-                        head = iter.right;
-                        root = head;
-                    } else {
-                        head.next = iter.right;
-                        head = head.next;
-                    }
+                if (cur.left != null) {
+                    q.add(cur.left);
                 }
-                iter = iter.next;
+                if (cur.right != null) {
+                    q.add(cur.right);
+                }
             }
-            head = root;
         }
+        return root;
     }
 }
