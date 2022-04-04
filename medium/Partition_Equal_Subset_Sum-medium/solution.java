@@ -30,26 +30,48 @@ Explanation: The array cannot be partitioned into equal sum subsets.
 
 class Solution {
     public boolean canPartition(int[] nums) {
-        if(nums.length == 1) return false;
-        if(nums.length == 2) return nums[1] == nums[0];
+        if (nums.length == 1) return false;
         int sum = 0;
-        for(int i=0; i<nums.length; i++) {
-            sum += nums[i];
+        for (int i : nums) {
+            sum += i;
         }
-        if(sum%2 != 0) return false;
-        int target = sum/2;
-        Arrays.sort(nums);
-        return works(nums, target, target, nums.length-1);
+        if (sum % 2 != 0) return false;
+        int target = sum / 2;
+        int n = nums.length;
+        // memo[i][j] = 1, find
+        // memo[i][j] = -1, not find
+        int[][] memo = new int[n][target+1];
+        if (dfs(nums, n-1, target, memo) == 1) {
+            return true;
+        } else {
+            return false;
+        }
     }
     
-    private boolean works(int[] nums, int s1, int s2, int index) {
-        if(index == -1) return s1 == 0 && s2 == 0;
-        if(nums[index] > s1) {
-            return works(nums, s1, s2-nums[index], index-1);
-        } else if (nums[index] > s2) {
-            return works(nums, s1-nums[index], s2, index-1);
-        } else {
-            return works(nums, s1, s2-nums[index], index-1) || works(nums, s1-nums[index], s2, index-1);   
+    private int dfs(int[] nums, int index, int target, int[][] memo) {
+        if (target < 0) {
+            return -1;
         }
+        if (target == 0) {
+            return 1;
+        }
+        if (index == 0) {
+            if (target == nums[0]) {
+                return 1;
+            } else {
+                return -1;
+            }
+        }
+        if (memo[index][target] != 0) {
+            return memo[index][target];
+        }
+        if (dfs(nums, index-1, target-nums[index], memo) == 1) {
+            memo[index][target] = 1;
+        } else if (dfs(nums, index-1, target, memo) == 1) {
+            memo[index][target] = 1;
+        } else {
+            memo[index][target] = -1;
+        }
+        return memo[index][target];
     }
 }

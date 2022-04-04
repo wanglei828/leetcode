@@ -13,7 +13,7 @@ Input: 9973
 Output: 9973
 Explanation: No swap.
 Note:
-The given number is in the range [0, 108]
+The given number is in the range [0, 10^8]
 
 */
 

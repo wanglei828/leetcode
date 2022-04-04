@@ -38,14 +38,13 @@ public class Solution {
         list = (list != null)? list : (new ArrayList<Integer>());
         int size = list.size();
         for(int i=start; i<nums.length; i++) {
-            if(last == -1) {
-                last = i;
-            }
-            while(i<nums.length && i>start && nums[i] == nums[last]) i++;
+            if(last != -1) {
+                while(i<nums.length && i>start && nums[i] == nums[last]) i++;
+            }        
             if(i == nums.length) break;
             if(target < nums[i]) break;
-            list.add(nums[i]);
             last = i;
+            list.add(nums[i]);
             helper(nums, i+1, target-nums[i], list);
             list.remove(size);
         }

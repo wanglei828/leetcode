@@ -29,9 +29,7 @@ public class Solution extends Relation {
                 set.add(i);
             }
         }
-        Iterator<Integer> iter = set.iterator();
-        while(iter.hasNext()) {
-            int tmp = iter.next();
+        for (int tmp : set) {
             if(!knows(tmp, cur) || knows(cur, tmp)) {
                 return -1;
             }
