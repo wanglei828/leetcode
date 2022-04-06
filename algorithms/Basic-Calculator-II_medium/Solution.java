@@ -13,39 +13,54 @@ Some examples:
 */
 
 public class Solution {
-   public int calculate(String s) {
-	if(s == null || s.length() == 0) return 0;
-        s = s.replaceAll(" ", "") + "#";
-        char op = '+';
-        int res = 0;
-        int start = 0;
-        Stack<Integer> stack = new Stack<Integer>();
-        int n = s.length();
-        for(int i=0; i<n; i++) {
-            char c = s.charAt(i);
-            if(c >= '0' && c <= '9') {
-                continue;
-            } else {
-                int cur = Integer.valueOf(s.substring(start,i));
-                switch(op) {
-                    case '+': 
-                    case '-':
-                        stack.push((op == '+')? cur : -cur);
-                        break;
-                    case '*':
-                        stack.push(stack.pop()*cur);
-                        break;
-                    case '/':
-                        stack.push(stack.pop()/cur);
-                        break;
-                }
-            }
-            op = c;
-            start = i+1;
+    int index;
+    public int calculate(String s) {
+        index = 0;
+        s = s.replaceAll("\\s", "");
+        return parseExp(s);
+    }
+    
+    private int parseExp(String s) {
+        int lhs = parseFac(s);
+        while (index < s.length() && (s.charAt(index) == '+' ||
+                                     s.charAt(index) == '-')) {
+            char op = s.charAt(index);
+            index++;
+            int rhs = parseFac(s);
+            lhs = calc(op, lhs, rhs);
         }
-        while(!stack.isEmpty()) {
-            res += stack.pop();
+        return lhs;
+    }
+    
+    private int parseFac(String s) {
+        int lhs = parseNum(s);
+        while (index < s.length() && (s.charAt(index) == '*' ||
+              s.charAt(index) == '/')) {
+            char op = s.charAt(index);
+            index++;
+            int rhs = parseNum(s);
+            lhs = calc(op, lhs, rhs);
+        }
+        return lhs;
+    }
+    
+    private int parseNum(String s) {
+        int num = 0;
+        while (index < s.length() && Character.isDigit(s.charAt(index))) {
+            num = num * 10 + s.charAt(index) - '0';
+            index++;
+        }
+        return num;
+    }
+    
+    private int calc(char op, int lhs, int rhs) {
+        int res = 0;
+        switch (op) {
+            case '+': res = lhs + rhs; break;
+            case '-': res = lhs - rhs; break;
+            case '*': res = lhs * rhs; break;
+            case '/': res = lhs / rhs; break;
         }
         return res;
-   }
+    }
 }
