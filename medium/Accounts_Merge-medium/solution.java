@@ -49,21 +49,18 @@ class Solution {
             }
         }
         
-        Map<String, Set<String>> emails = new HashMap<>();
+        Map<String, List<String>> emails = new HashMap<>();
         for(String cur: roots.keySet()) {
             String root = findRoot(roots, cur);
             if(!emails.containsKey(root)) {
-                emails.put(root, new HashSet<String>());
+                emails.put(root, new ArrayList<String>());
             }
             emails.get(root).add(cur);
         }
         
         List<List<String>> res = new ArrayList<>();
         for(String email: emails.keySet()) {
-            List<String> list = new ArrayList<>();
-            for(String str: emails.get(email)) {
-                list.add(str);
-            }
+            List<String> list = emails.get(email);
             Collections.sort(list);
             list.add(0, owner.get(email));
             res.add(list);
