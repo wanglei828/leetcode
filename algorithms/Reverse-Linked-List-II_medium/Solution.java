@@ -20,29 +20,27 @@ Given m, n satisfy the following condition:
  * }
  */
 public class Solution {
-    public ListNode reverseBetween(ListNode head, int m, int n) {
-        if(head == null || m == n) return head;
-        ListNode res = new ListNode(0);
-        res.next = head;
-        ListNode pre = res;
-        while(m!=1) {
-            m--;
-            n--;
-            pre = head;
+    public ListNode reverseBetween(ListNode head, int left, int right) {
+        ListNode dummy = new ListNode();
+        ListNode prev = dummy;
+        prev.next = head;
+        while (left > 1) {
+            prev = head;
             head = head.next;
+            left--;
+            right--;
         }
-        ListNode bef = null;
-        ListNode cur = head;
-        ListNode next = null;
-        while(n !=0) {
-            next = cur.next;
-            cur.next = bef;
-            bef = cur;
-            cur = next;
-            n--;
+        ListNode con = prev;
+        ListNode tail = head;
+        while (right > 0) {
+            ListNode next = head.next;
+            head.next = prev;
+            prev = head;
+            head = next;
+            right--;
         }
-        pre.next = bef;
-        head.next = cur;
-        return res.next;
+        con.next = prev;
+        tail.next = head;
+        return dummy.next;
     }
 }
