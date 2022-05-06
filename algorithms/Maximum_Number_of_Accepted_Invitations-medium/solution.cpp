@@ -41,6 +41,7 @@ grid[i].length == n
 grid[i][j] is either 0 or 1.
 */
 
+// Hungarian algorithm
 class Solution {
 public:
     int maximumInvitations(vector<vector<int>>& grid) {
