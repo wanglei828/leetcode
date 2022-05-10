@@ -122,7 +122,8 @@ class Solution {
         root.topRight = buildTree(grid, rs, rs + (rt-rs)/2, cs + (ct-cs)/2, ct);
         root.bottomLeft = buildTree(grid, rs + (rt-rs)/2, rt, cs, cs + (ct-cs)/2);
         root.bottomRight = buildTree(grid, rs + (rt-rs)/2, rt, cs + (ct-cs)/2, ct);
-        if (root.topLeft.isLeaf && root.topRight.isLeaf && root.bottomLeft.isLeaf && root.bottomRight.isLeaf & root.topLeft.val == root.topRight.val && root.topLeft.val == root.bottomLeft.val && root.topLeft.val == root.bottomRight.val) {
+        if (root.topLeft.isLeaf && root.topRight.isLeaf && root.bottomLeft.isLeaf && root.bottomRight.isLeaf &&
+            root.topLeft.val == root.topRight.val && root.topLeft.val == root.bottomLeft.val && root.topLeft.val == root.bottomRight.val) {
             root.val = root.topRight.val;
             root.isLeaf = true;
             root.topLeft = null;
