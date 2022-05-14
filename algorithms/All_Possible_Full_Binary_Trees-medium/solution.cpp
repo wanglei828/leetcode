@@ -43,8 +43,7 @@ public:
             return map[n];
         }
         vector<TreeNode*> res;
-        if (n == 0) {
-            map[0] = res;
+        if (n % 2 == 0) {
             return res;
         }
         if (n == 1) {
