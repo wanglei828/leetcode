@@ -45,11 +45,16 @@ secret is sorted in a strictly increasing order.
 class Solution {
 public:
     int search(const ArrayReader& reader, int target) {
+        if (reader.get(0) == target) return 0;
         int h = 0;
-        int t = 9999;
+        int t = 1;
+        while (reader.get(t) < target) {
+            h = t;
+            t <<= 1;
+        }
         while (h <= t) {
             int m = h + (t-h)/2;
-            if (reader.get(m) == INT_MAX || reader.get(m) > target) {
+            if (reader.get(m) > target) {
                 t = m - 1;
             } else if (reader.get(m) < target) {
                 h = m + 1;
