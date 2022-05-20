@@ -34,21 +34,15 @@ class Solution {
 public:
     bool equationsPossible(vector<string>& equations) {
         int root[26];
-        memset(root, -1, sizeof(root));
+        for (int i = 0; i < 26; i++) {
+            root[i] = i;
+        }
         for (string s : equations) {
             if (s[1] == '!') continue;
             int u = s[0] - 'a';
             int v = s[3] - 'a';
             int ru = find(root, u);
             int rv = find(root, v);
-            if (ru == -1) {
-                root[u] = u;
-                ru = u;
-            }
-            if (rv == -1) {
-                root[v] = v;
-                rv = v;
-            }
             root[ru] = rv;
         }
         for (string s : equations) {
@@ -57,14 +51,6 @@ public:
             int v = s[3] - 'a';
             int ru = find(root, u);
             int rv = find(root, v);
-            if (ru == -1) {
-                root[u] = u;
-                ru = u;
-            }
-            if (rv == -1) {
-                root[v] = v;
-                rv = v;
-            }
             if (ru == rv) {
                 return false;
             }
@@ -73,9 +59,6 @@ public:
     }
     
     int find(int root[26], int c) {
-        if (root[c] == -1) {
-            return -1;
-        }
         while (root[c] != c) {
             int tmp = root[c];
             root[c] = root[tmp];
